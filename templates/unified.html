@@ -22,7 +22,7 @@ a{color:inherit;text-decoration:none}.wrap{max-width:1180px;margin:auto;padding:
 .loginbox{max-width:430px;margin:25px auto 60px}.loginlink{text-align:center;color:#777;font-size:12px;margin-top:20px}
 @media(max-width:900px){.g3,.g4,.stats,.admin-grid{grid-template-columns:repeat(2,1fr)}.hero h2{font-size:34px}}@media(max-width:620px){.g3,.g4,.stats,.admin-grid,.form{grid-template-columns:1fr}.full{grid-column:auto}.hero h2{font-size:30px}.topbar{padding:10px 0;align-items:flex-start;flex-direction:column}}
 </style>
-<link rel="manifest" href="/manifest.webmanifest">
+<link rel="manifest" href="/static/manifest.webmanifest">
 <meta name="theme-color" content="#070707">
 </head>
 <body>
@@ -125,4 +125,4 @@ loadSlots();
 </tbody></table></div></div>
 </div>
 {% endif %}
-</body></html>
+<script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js").catch(()=>{}));}</script></body></html>
