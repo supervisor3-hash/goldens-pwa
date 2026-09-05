@@ -1,0 +1,43 @@
+GOLDENS PWA - INSTALABLE EN CELULAR
+
+ESTA ES LA MISMA BASE GOLDENS QUE USTED SUBIO.
+Se agregaron solamente las funciones necesarias para instalarla como PWA.
+
+IMPORTANTE:
+Para instalar GOLDENS en un celular, el sistema debe estar publicado con HTTPS.
+El proyecto ya incluye render.yaml y gunicorn, por lo que esta preparado para Render.
+
+ANDROID / GOOGLE CHROME
+1. Abra la direccion HTTPS de GOLDENS en Chrome.
+2. Toque el menu de los tres puntos.
+3. Toque "Instalar aplicacion" o "Agregar a pantalla principal".
+4. Confirme GOLDENS.
+5. Aparecera el icono G en el celular.
+
+IPHONE / SAFARI
+1. Abra la direccion HTTPS de GOLDENS en Safari.
+2. Toque Compartir.
+3. Toque "Agregar a pantalla de inicio".
+4. Confirme el nombre GOLDENS.
+5. Abra GOLDENS desde el icono de la pantalla de inicio.
+
+LO QUE SE AGREGO
+- manifest.webmanifest
+- service-worker.js
+- iconos 192, 512 y Apple Touch
+- modo standalone
+- pantalla completa tipo app
+- caché basica para recursos
+- endpoint /pwa-check
+- soporte Android e iPhone
+
+NOTA SOBRE DATOS
+Para usar los mismos datos desde PC y celular, DATABASE_URL debe apuntar a
+una base de datos del servidor (por ejemplo PostgreSQL en Render).
+No use SQLite local si varios dispositivos van a compartir la informacion.
+
+PRUEBA
+Despues de publicar:
+https://SU-DOMINIO/pwa-check
+
+Debe devolver pwa: true.

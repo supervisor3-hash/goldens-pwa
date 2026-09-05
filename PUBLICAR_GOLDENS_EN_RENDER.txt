@@ -1,0 +1,37 @@
+GOLDENS PWA - LISTO PARA RENDER
+
+ESTE PAQUETE YA ESTA PREPARADO PARA:
+- HTTPS
+- PWA instalable
+- Android
+- iPhone
+- Base PostgreSQL compartida
+- PC y celular usando los mismos datos
+
+PUBLICAR EN RENDER:
+1. Suba esta carpeta a un repositorio de GitHub.
+2. En Render: New + -> Blueprint.
+3. Conecte el repositorio.
+4. Render detectara render.yaml.
+5. Cree el Blueprint.
+6. Espere a que termine el deploy.
+7. Render le dara una direccion parecida a:
+   https://goldens.onrender.com
+
+EN EL CELULAR:
+Abra:
+https://SU-DIRECCION.onrender.com/instalar
+
+Android:
+- Chrome -> Instalar GOLDENS
+
+iPhone:
+- Safari -> Compartir -> Agregar a pantalla de inicio
+
+DATOS COMPARTIDOS:
+El proyecto usa DATABASE_URL de Render para PostgreSQL.
+La computadora y el celular pueden trabajar con la misma base.
+
+IMPORTANTE:
+Yo no puedo iniciar sesion en su cuenta de Render ni publicar el proyecto
+sin acceso a esa cuenta. El codigo y la configuracion ya quedan preparados.
