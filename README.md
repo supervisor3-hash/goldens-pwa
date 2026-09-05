@@ -14,7 +14,7 @@ Esta versión no necesita Meta Developers, WATI ni una API de pago.
 Antes de ejecutar el sistema, en CMD escriba:
 
 ```bat
-set GOLDENS_WHATSAPP_NUMBER=506XXXXXXXX
+set GOLDENS_WHATSAPP_NUMBER=50660158371
 python app.py
 ```
 
