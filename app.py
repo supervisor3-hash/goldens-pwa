@@ -2,6 +2,7 @@
 import os
 import re
 import json
+import shutil
 from pathlib import Path
 from datetime import datetime, date, time, timedelta
 from functools import wraps
@@ -43,6 +44,26 @@ db = SQLAlchemy(app)
 
 UPLOAD_DIR = Path(app.root_path) / "static" / "uploads"
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+
+# The original PWA assets are at the repository root. Copy them into Flask's
+# static folder on startup so Render can serve the manifest, service worker
+# and app icons even when GitHub uploads omit the static directory.
+LEGACY_STATIC_FILES = [
+    "goldens-192.png",
+    "goldens-512.png",
+    "apple-touch-icon.png",
+    "manifest.webmanifest",
+    "service-worker.js",
+]
+for _filename in LEGACY_STATIC_FILES:
+    _src = Path(app.root_path) / _filename
+    _dst = Path(app.static_folder) / _filename
+    try:
+        if _src.exists() and not _dst.exists():
+            _dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(_src, _dst)
+    except Exception:
+        pass
 ALLOWED_IMAGE_EXTENSIONS = {"jpg", "jpeg", "png", "webp"}
 app.config["MAX_CONTENT_LENGTH"] = 8 * 1024 * 1024
 
