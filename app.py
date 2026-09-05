@@ -14,18 +14,31 @@ from sqlalchemy import UniqueConstraint
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
+app.secret_key = os.getenv("SECRET_KEY", "goldens-local-dev")
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "change-this-secret-before-production")
 
-database_url = os.getenv("DATABASE_URL", "sqlite:///goldens.db")
-if database_url.startswith("postgres://"):
-    database_url = database_url.replace("postgres://", "postgresql://", 1)
 database_url = os.getenv("DATABASE_URL", "").strip()
+
+# Render/PostgreSQL: force psycopg v3.
 if database_url.startswith("postgres://"):
-    database_url = "postgresql://" + database_url[len("postgres://"):]
+    database_url = "postgresql+psycopg://" + database_url[len("postgres://"):]
+elif database_url.startswith("postgresql://"):
+    database_url = "postgresql+psycopg://" + database_url[len("postgresql://"):]
+
 if not database_url:
     database_url = "sqlite:///" + str(Path(app.instance_path) / "goldens.db")
+
 app.config["SQLALCHEMY_DATABASE_URI"] = database_url
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+if database_url.startswith("postgresql+psycopg://"):
+    app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
+        "pool_pre_ping": True,
+        "pool_recycle": 240,
+        "pool_size": 1,
+        "max_overflow": 1,
+        "pool_timeout": 30,
+    }
 db = SQLAlchemy(app)
 
 UPLOAD_DIR = Path(app.root_path) / "static" / "uploads"
