@@ -10,7 +10,7 @@ from uuid import uuid4
 
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify, abort, send_from_directory, make_response
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import UniqueConstraint
+from sqlalchemy import UniqueConstraint, inspect, text
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
@@ -141,6 +141,7 @@ class Appointment(db.Model):
     status = db.Column(db.String(40), nullable=False, default="Confirmada")
     notes = db.Column(db.Text, default="")
     source = db.Column(db.String(30), default="Web")
+    payment_method = db.Column(db.String(30), nullable=False, default="")
     whatsapp_message_id = db.Column(db.String(250), default="")
     reminder_30_sent = db.Column(db.Boolean, default=False)
     reminder_10_sent = db.Column(db.Boolean, default=False)
@@ -153,6 +154,19 @@ class Appointment(db.Model):
     __table_args__ = (
         UniqueConstraint("barber_id", "appointment_date", "appointment_time", name="uq_barber_slot"),
     )
+
+PAYMENT_METHODS = {"Efectivo", "SINPE Móvil"}
+
+def ensure_schema_updates():
+    """Aplica cambios pequeños de esquema sin borrar la base existente."""
+    inspector = inspect(db.engine)
+    table_name = Appointment.__tablename__
+    columns = {col["name"] for col in inspector.get_columns(table_name)}
+    if "payment_method" not in columns:
+        db.session.execute(text(
+            f"ALTER TABLE \"{table_name}\" ADD COLUMN payment_method VARCHAR(30) DEFAULT ''"
+        ))
+        db.session.commit()
 
 GOLDENS_STANDARD_SERVICES = [
     ("Corte una peineta", 4000, 30),
@@ -311,7 +325,8 @@ def booking_message(ap):
         f"Barbero: {ap.barber.name}\n"
         f"Fecha: {ap.appointment_date.strftime('%d/%m/%Y')}\n"
         f"Hora: {ap.appointment_time.strftime('%H:%M')}\n"
-        f"Precio: {money(ap.price)}\n\n"
+        f"Precio: {money(ap.price)}\n"
+        f"Método de pago: {ap.payment_method or 'No indicado'}\n\n"
         "Quiero confirmar mi reserva."
     )
 
@@ -324,7 +339,8 @@ def confirmation_message(ap):
         f"Barbero: {ap.barber.name}\n"
         f"Fecha: {ap.appointment_date.strftime('%d/%m/%Y')}\n"
         f"Hora: {ap.appointment_time.strftime('%H:%M')}\n"
-        f"Precio: {money(ap.price)}\n\n"
+        f"Precio: {money(ap.price)}\n"
+        f"Método de pago: {ap.payment_method or 'No indicado'}\n\n"
         "Te esperamos en Goldens Barbershop."
     )
 
@@ -381,6 +397,7 @@ def reserve():
     name = request.form.get("name", "").strip()
     phone = normalize_phone(request.form.get("phone", ""))
     notes = request.form.get("notes", "").strip()
+    payment_method = request.form.get("payment_method", "").strip()
 
     try:
         barber_id = int(request.form["barber_id"])
@@ -393,6 +410,10 @@ def reserve():
 
     if not name or len(phone) < 11 or ap_date < date.today():
         flash("Revisá tu nombre, teléfono y fecha.", "error")
+        return redirect(url_for("public_home"))
+
+    if payment_method not in PAYMENT_METHODS:
+        flash("Seleccioná si vas a pagar en Efectivo o por SINPE Móvil.", "error")
         return redirect(url_for("public_home"))
 
     barber = Barber.query.filter_by(id=barber_id, active=True).first_or_404()
@@ -421,6 +442,7 @@ def reserve():
         status="Confirmada",
         notes=notes,
         source="Web",
+        payment_method=payment_method,
     )
     db.session.add(ap)
     try:
@@ -632,6 +654,7 @@ def init_db():
 
 with app.app_context():
     db.create_all()
+    ensure_schema_updates()
     seed()
     ensure_goldens_standard_services()
 
