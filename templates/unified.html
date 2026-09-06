@@ -361,9 +361,12 @@ th{background:#17150d;color:var(--gold2);text-transform:uppercase;font-size:11px
  .v13-big.smallline{font-size:34px}
 }
 
-.v13-cancel-link{width:100%;border:0;background:none;color:#9c1f1f;font-size:10px;font-weight:800;cursor:pointer;margin-top:5px;padding:5px}
-.v13-cancel-box{margin-top:5px;padding-top:7px;border-top:1px solid #ddd}
-.v13-cancel-submit{width:100%;border:1px solid #a73636;background:#fff5f5;color:#9c1f1f;border-radius:6px;padding:8px;font-weight:800;cursor:pointer;margin-top:5px}
+.v13-pay-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:9px}
+.v13-pay-option{display:flex;align-items:center;justify-content:center;gap:6px;background:#fff;border:1px solid #cfcfcf;border-radius:8px;padding:9px;color:#111;font-size:12px;cursor:pointer}
+.v13-pay-option input{accent-color:#c88f18}
+.v13-cancel-link{width:100%;border:0;background:none;color:#9b2a2a;font-size:11px;font-weight:800;cursor:pointer;margin-top:3px;padding:6px}
+.v13-cancel-box{margin-top:4px;padding-top:7px;border-top:1px solid #ddd}
+.v13-cancel-submit{width:100%;border:1px solid #a73636;background:#fff5f5;color:#9c1f1f;border-radius:8px;padding:9px;font-weight:800;cursor:pointer;margin-top:5px}
 
 </style>
 </head>
@@ -378,7 +381,7 @@ th{background:#17150d;color:var(--gold2);text-transform:uppercase;font-size:11px
 <div class="v13-shell">
   <div class="v13-titlebar">
     <div class="v13-titlebrand">
-      <img src="/static/goldens-512.png" alt="Goldens">
+      <img src="/static/assets/goldens_g_logo.jpg" alt="Goldens">
       <span>GOLDENS - SISTEMA DE GESTIÓN</span>
     </div>
   </div>
@@ -406,14 +409,14 @@ th{background:#17150d;color:var(--gold2);text-transform:uppercase;font-size:11px
       </div>
 
       <div class="v13-centerlogo">
-        <img src="/static/goldens-512.png" alt="Goldens G">
+        <img src="/static/assets/goldens_g_logo.jpg" alt="Goldens G">
         <div class="v13-management">BARBERSHOP MANAGEMENT</div>
       </div>
     </section>
 
     <aside class="v13-booking">
       <div class="v13-booking-logo">
-        <img src="/static/goldens-512.png" alt="Goldens">
+        <img src="/static/assets/goldens_g_logo.jpg" alt="Goldens">
       </div>
       <div class="v13-booking-name">GOLDENS</div>
       <div class="v13-booking-sub">BARBERSHOP</div>
@@ -451,28 +454,27 @@ th{background:#17150d;color:var(--gold2);text-transform:uppercase;font-size:11px
           </div>
 
           <div class="v13-field"><label>Forma de pago</label>
-            <select name="payment_method" required>
-              <option value="">Seleccioná una opción</option>
-              <option value="Efectivo">Efectivo</option>
-              <option value="SINPE Móvil">SINPE Móvil</option>
-            </select>
+            <div class="v13-pay-row">
+              <label class="v13-pay-option"><input type="radio" name="payment_method" value="Efectivo" required> Efectivo</label>
+              <label class="v13-pay-option"><input type="radio" name="payment_method" value="SINPE Móvil" required> SINPE Móvil</label>
+            </div>
           </div>
 
           <div class="v13-field"><label>Comentario opcional</label><textarea name="notes" rows="2"></textarea></div>
           <button class="v13-reserve form-submit" type="submit">Confirmar reserva</button>
+          <button class="v13-cancel-link" type="button" onclick="toggleClientCancel()">¿Agendaste por error? Cancelar cita</button>
+          <div id="clientCancelBox" class="v13-cancel-box hidden">
+            <form method="post" action="/cancelar-mi-cita" onsubmit="return confirm('¿Seguro que deseas cancelar esta cita?');">
+              <div class="v13-field"><label>WhatsApp usado en la reserva</label><input name="phone" required placeholder="8888-8888"></div>
+              <div class="v13-row2">
+                <div class="v13-field"><label>Fecha de la cita</label><input type="date" name="appointment_date" required></div>
+                <div class="v13-field"><label>Hora de la cita</label><input type="time" name="appointment_time" required></div>
+              </div>
+              <button class="v13-cancel-submit" type="submit">Cancelar mi cita</button>
+            </form>
+          </div>
           <button class="v13-back" type="button" onclick="hideBooking()">← Volver</button>
         </form>
-        <button class="v13-cancel-link" type="button" onclick="toggleClientCancel()">¿Agendaste por error? Cancelar cita</button>
-        <div id="clientCancelBox" class="v13-cancel-box hidden">
-          <form method="post" action="/cancelar-mi-cita" onsubmit="return confirm('¿Seguro que deseas cancelar esta cita?');">
-            <div class="v13-field"><label>WhatsApp usado en la reserva</label><input name="phone" required placeholder="8888-8888"></div>
-            <div class="v13-row2">
-              <div class="v13-field"><label>Fecha</label><input type="date" name="appointment_date" required></div>
-              <div class="v13-field"><label>Hora</label><input type="time" name="appointment_time" required></div>
-            </div>
-            <button class="v13-cancel-submit" type="submit">Cancelar mi cita</button>
-          </form>
-        </div>
       </div>
     </aside>
   </div>
@@ -485,7 +487,7 @@ th{background:#17150d;color:var(--gold2);text-transform:uppercase;font-size:11px
     </nav>
 
     <div class="v13-bottombrand">
-      <img src="/static/goldens-512.png" alt="Goldens">
+      <img src="/static/assets/goldens_g_logo.jpg" alt="Goldens">
       <div>GOLDENS</div>
       <small>BARBERSHOP</small>
     </div>
@@ -659,6 +661,11 @@ function filterClientCards(){
     showBottom('servicios',serviceBtn);
   }
 }
+function toggleClientCancel(){
+  const box=document.getElementById('clientCancelBox');
+  if(box) box.classList.toggle('hidden');
+}
+
 </script>
 
 {% else %}
@@ -666,7 +673,7 @@ function filterClientCards(){
 <div class="admin-page">
 <aside class="sidebar">
  <div class="side-brand">
-   <div class="side-logo"><img src="/static/goldens-512.png" alt="Goldens"></div>
+   <div class="side-logo"><img src="/static/assets/goldens_g_logo.jpg" alt="Goldens"></div>
    <div><h2>GOLDENS</h2><small>BARBERSHOP</small></div>
  </div>
 
@@ -768,9 +775,9 @@ function filterClientCards(){
        <select name="status"><option>Confirmada</option><option>Pendiente</option><option>Atendida</option><option>Cancelada</option><option>No llegó</option></select>
        <button class="btn dark">OK</button>
       </form>
-                <form method="post" action="/admin/appointment/{{a.id}}/delete" onsubmit="return confirm('¿Seguro que deseas eliminar esta cita?');" style="display:inline">
-                  <button class="mini danger" type="submit">Eliminar</button>
-                </form>
+      <form method="post" action="/admin/appointment/{{a.id}}/delete" style="display:inline;margin-left:5px" onsubmit="return confirm('¿Seguro que deseas eliminar esta cita?');">
+       <button class="btn danger" type="submit">Eliminar</button>
+      </form>
      </td>
     </tr>
     {% endfor %}
@@ -902,11 +909,5 @@ function filterClientCards(){
 </div>
 
 {% endif %}
-<script>
-function toggleClientCancel(){
-  const box=document.getElementById('clientCancelBox');
-  if(box) box.classList.toggle('hidden');
-}
-</script>
 </body>
 </html>
