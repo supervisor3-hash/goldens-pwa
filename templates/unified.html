@@ -2,127 +2,408 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Goldens Barbershop</title>
-<style>
-:root{--bg:#070707;--panel:#111;--gold:#d6b34a;--gold2:#f3d77c;--txt:#f5f5f5;--muted:#9a9a9a;--line:#30291a;--green:#1f6f3b;--red:#6f2525}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top right,#2a2108,#080808 38%,#050505);color:var(--txt);font-family:Arial,Helvetica,sans-serif}
-a{color:inherit;text-decoration:none}.wrap{max-width:1180px;margin:auto;padding:0 18px}.topbar{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:14px;border-bottom:1px solid #292313}
-.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border:2px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-size:28px;font-weight:900}.brand h1{font-size:18px;margin:0;letter-spacing:1.4px}.brand small{color:#888}
-.btn{border:0;border-radius:10px;padding:10px 14px;font-weight:800;cursor:pointer;display:inline-block}.gold{background:linear-gradient(135deg,var(--gold2),#9a7311);color:#080808}.dark{background:#1d1d1d;color:#fff;border:1px solid #3a3a3a}.green{background:#183d24;color:#c9f6d7;border:1px solid #2d7042}.danger{background:#3b1818;color:#ffc0c0;border:1px solid #6a3030}
-.hero{text-align:center;padding:54px 0 28px}.hero h2{font-size:42px;max-width:800px;margin:0 auto 12px;line-height:1.05}.hero strong{color:var(--gold2)}.hero p{color:var(--muted);font-size:18px}
-.section{padding:28px 0}.section h3{font-size:28px;margin:0 0 6px}.sub{color:var(--muted);margin:0 0 16px}.grid{display:grid;gap:14px}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
-.card{background:linear-gradient(180deg,#151515,#0d0d0d);border:1px solid var(--line);border-radius:16px;padding:17px;box-shadow:0 14px 40px #0005}.price{font-size:26px;font-weight:900;color:var(--gold2);margin-top:8px}.meta{color:#8e8e8e;font-size:13px}
-.photo{width:100%;height:150px;border-radius:12px;border:1px solid #29251a;background:#0a0a0a;display:grid;place-items:center;overflow:hidden;margin-bottom:12px;color:var(--gold);font-size:34px;font-weight:900}.photo img{width:100%;height:100%;object-fit:contain}
-.avatar{width:110px;height:110px;border-radius:50%;border:2px solid var(--gold);display:grid;place-items:center;overflow:hidden;margin:0 auto 12px;color:var(--gold);font-size:34px;font-weight:900}.avatar img{width:100%;height:100%;object-fit:cover}.barber{text-align:center}
-.form{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.field{display:flex;flex-direction:column;gap:6px}.full{grid-column:1/-1}label{font-size:12px;color:#c8c8c8}input,select,textarea{background:#090909;color:#fff;border:1px solid #3a3a3a;border-radius:9px;padding:10px 11px;outline:none}input:focus,select:focus,textarea:focus{border-color:var(--gold)}
-.flash{max-width:1180px;margin:12px auto;padding:12px 18px;border-radius:10px;border:1px solid #5a4815;background:#1a160a;color:#f3d77c}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.stat{background:#111;border:1px solid var(--line);border-radius:14px;padding:15px}.stat small{color:#888}.stat strong{display:block;color:var(--gold2);font-size:26px;margin-top:5px}
-.admin{max-width:1280px;margin:20px auto;padding:0 18px}.admin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.admin-card{background:#111;border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:14px}.manage-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.manage{background:#0b0b0b;border:1px solid #2d281b;border-radius:12px;padding:12px}.thumb{height:110px;border:1px solid #292929;border-radius:10px;overflow:hidden;display:grid;place-items:center;color:var(--gold);margin-bottom:10px}.thumb img{width:100%;height:100%;object-fit:contain}
-.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:1000px}th,td{padding:10px;border-bottom:1px solid #242424;text-align:left;font-size:13px;vertical-align:top}th{background:#17150e;color:var(--gold2)}.badge{display:inline-block;padding:5px 8px;border-radius:999px;background:#292929;font-size:11px;font-weight:800}.actions{display:flex;gap:6px;flex-wrap:wrap}
-.loginbox{max-width:430px;margin:25px auto 60px}.loginlink{text-align:center;color:#777;font-size:12px;margin-top:20px}
-@media(max-width:900px){.g3,.g4,.stats,.admin-grid{grid-template-columns:repeat(2,1fr)}.hero h2{font-size:34px}}@media(max-width:620px){.g3,.g4,.stats,.admin-grid,.form{grid-template-columns:1fr}.full{grid-column:auto}.hero h2{font-size:30px}.topbar{padding:10px 0;align-items:flex-start;flex-direction:column}}
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Goldens Agenda</title>
 <link rel="manifest" href="/static/manifest.webmanifest">
-<meta name="theme-color" content="#070707">
+<meta name="theme-color" content="#080808">
+<style>
+:root{
+  --bg:#050505;
+  --panel:#0f0f0f;
+  --panel2:#141414;
+  --gold:#d7b23a;
+  --gold2:#f1d56f;
+  --line:#2f2816;
+  --txt:#f5f5f5;
+  --muted:#8f8f8f;
+  --green:#0f5e32;
+  --green2:#1d8a4b;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:
+radial-gradient(circle at 92% 0%,#2a2308 0%,#0b0b08 28%,#050505 68%);color:var(--txt)}
+button,input,select,textarea{font:inherit}
+a{text-decoration:none;color:inherit}
+.flash-wrap{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:1000;width:min(760px,92vw)}
+.flash{background:#17130a;border:1px solid #5c4a16;color:#f6de86;padding:12px 16px;border-radius:10px;box-shadow:0 14px 40px #000a;margin-bottom:8px}
+.app{min-height:100vh}
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:148px;background:linear-gradient(180deg,#070707,#030303);border-right:1px solid #3b321c;padding:12px 10px;z-index:40}
+.brand{display:flex;align-items:center;gap:10px;padding:0 3px 18px}
+.logo{width:48px;height:48px;border-radius:50%;border:2px solid var(--gold);display:grid;place-items:center;color:var(--gold);font-weight:900;font-size:28px;box-shadow:0 0 28px #d6b34a20}
+.brand h1{font-size:14px;letter-spacing:1.6px;margin:0}.brand small{display:block;color:#7e7e7e;font-size:9px;margin-top:2px}
+.nav-title{font-size:8px;color:#555;letter-spacing:1.7px;margin:10px 5px 7px}
+.nav a{display:flex;align-items:center;gap:9px;padding:10px 10px;border-radius:8px;color:#e9e9e9;font-size:12px;font-weight:800;margin-bottom:4px}
+.nav a:hover,.nav a.active{background:linear-gradient(90deg,#1c180c,#141109);color:#ffe58b}
+.nav .ico{width:16px;text-align:center}
+.side-foot{position:absolute;bottom:20px;left:0;right:0;text-align:center;color:#4d4d4d;font-size:7px;letter-spacing:2px;line-height:1.5}
+.main{margin-left:148px;min-height:100vh;padding:18px 18px 40px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}
+.top h2{margin:0;color:#fff;font-size:21px}.top h2 span{color:var(--gold2)}.top p{margin:4px 0 0;color:#8c8c8c;font-size:11px}
+.top-actions{display:flex;gap:8px;align-items:center}
+.btn{border:1px solid transparent;border-radius:9px;padding:9px 12px;font-weight:900;cursor:pointer;font-size:11px}
+.btn-dark{background:#1a1a1a;color:#fff;border-color:#373737}.btn-dark:hover{background:#242424}
+.btn-gold{background:linear-gradient(135deg,#f0d56d,#ad841b);color:#090909}.btn-gold:hover{filter:brightness(1.05)}
+.btn-green{background:#0f5d31;color:#bdf7d2;border-color:#267749}.btn-danger{background:#371717;color:#ffb0b0;border-color:#6a2b2b}
+.bell{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#111;border:1px solid #3b321c;color:#f1d56f}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.stat-card{background:linear-gradient(180deg,#111,#0b0b0b);border:1px solid #3d351e;border-radius:14px;padding:16px;min-height:100px;display:flex;align-items:center;gap:14px;box-shadow:0 12px 36px #0005}
+.stat-ico{width:42px;height:42px;border:1px solid #564715;border-radius:50%;display:grid;place-items:center;font-size:20px;color:var(--gold2)}
+.stat-card small{display:block;color:#8b8b8b;font-size:9px;letter-spacing:1px;text-transform:uppercase}.stat-card strong{display:block;font-size:27px;color:var(--gold2);margin-top:4px}.stat-card em{display:block;color:#777;font-size:9px;font-style:normal;margin-top:4px}
+.panel{background:linear-gradient(180deg,#111,#0b0b0b);border:1px solid #342d1a;border-radius:14px;margin-bottom:12px;padding:12px}
+.panel-head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:8px}.panel-head h3{margin:0;font-size:15px}.panel-head p{margin:3px 0 0;color:#7d7d7d;font-size:9px}
+.table-wrap{overflow:auto;border-radius:10px}
+table{width:100%;border-collapse:collapse;min-width:850px;background:#0c0c0c}
+th{background:#151309;color:#f1d56f;font-size:8px;letter-spacing:.7px;text-transform:uppercase;padding:9px 8px;text-align:left}
+td{padding:10px 8px;border-bottom:1px solid #1d1d1d;font-size:9px;color:#eee;vertical-align:middle}
+td strong{font-size:10px}.badge{display:inline-block;padding:5px 8px;border-radius:999px;font-size:8px;font-weight:900;background:#242424;color:#fff}
+.badge.gold{background:#503d00;color:#ffe278;border:1px solid #7f6400}
+.badge.good{background:#123d24;color:#b9efc9}
+.actions{display:flex;gap:5px;flex-wrap:wrap;align-items:center}.actions select{min-width:95px}
+.section-anchor{scroll-margin-top:15px}
+.manage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.manage-card{background:#0b0b0b;border:1px solid #2b2618;border-radius:12px;padding:12px}
+.manage-card h4{margin:0 0 10px;font-size:13px;color:#f2d570}
+.manage-row{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.field{display:flex;flex-direction:column;gap:5px;margin-bottom:8px}.field label{font-size:8px;color:#8f8f8f;text-transform:uppercase;letter-spacing:.6px}
+input,select,textarea{background:#070707;color:#fff;border:1px solid #333;border-radius:8px;padding:8px 9px;outline:none;font-size:10px}
+input:focus,select:focus,textarea:focus{border-color:#8c6f18}
+.thumb{height:100px;border:1px solid #2a2a2a;border-radius:9px;background:#070707;display:grid;place-items:center;overflow:hidden;margin-bottom:9px;color:#d7b23a;font-size:25px}.thumb img{width:100%;height:100%;object-fit:contain}
+.mini-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:9px}
+.mini-card{background:#0a0a0a;border:1px solid #2a2518;border-radius:10px;padding:10px}
+.mini-card h5{font-size:11px;margin:0 0 8px}.mini-card .muted{font-size:9px;color:#7e7e7e;margin-bottom:8px}
+.client-shell{max-width:1120px;margin:auto;padding:20px}.client-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.client-hero{text-align:center;padding:46px 15px 24px}.client-hero h1{font-size:38px;margin:0 0 10px}.client-hero h1 span{color:var(--gold2)}.client-hero p{color:#999;margin:0 0 18px}
+.client-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.client-card{background:#101010;border:1px solid #352f1d;border-radius:14px;padding:14px}.client-card .price{color:var(--gold2);font-size:22px;font-weight:900;margin-top:8px}
+.booking{margin-top:16px;background:#100e08;border:1px solid #574718;border-radius:14px;padding:15px}.booking .form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.full{grid-column:1/-1}
+dialog{width:min(640px,94vw);border:1px solid #5a4918;border-radius:14px;background:#0d0d0d;color:#fff;padding:0}.modal-head{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid #2a2519}.modal-body{padding:16px}.x{background:none;border:0;color:#aaa;font-size:22px;cursor:pointer}
+@media(max-width:900px){.sidebar{width:72px}.brand h1,.brand small,.nav span:not(.ico),.nav-title,.side-foot{display:none}.brand{justify-content:center}.main{margin-left:72px}.cards,.manage-grid{grid-template-columns:1fr}.client-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.main{padding:12px}.top{flex-direction:column}.cards,.client-grid,.booking .form-grid,.manage-row{grid-template-columns:1fr}.full{grid-column:auto}.client-hero h1{font-size:30px}.sidebar{width:58px}.main{margin-left:58px}.nav a{justify-content:center}.brand .logo{width:40px;height:40px;font-size:22px}}
+</style>
 </head>
 <body>
-<header><div class="wrap topbar">
-<div class="brand"><div class="logo">G</div><div><h1>GOLDENS</h1><small>BARBERSHOP</small></div></div>
-<div>{% if admin_mode %}<span class="badge">MODO ADMIN</span> <a class="btn dark" href="/admin/logout">Salir admin</a>{% else %}<a class="btn gold" href="#reservar">Agenda tu cita</a>{% endif %}</div>
-</div></header>
 
 {% with messages=get_flashed_messages(with_categories=true) %}
-{% for cat,msg in messages %}<div class="flash">{{msg}}</div>{% endfor %}
+{% if messages %}<div class="flash-wrap">{% for cat,msg in messages %}<div class="flash">{{msg}}</div>{% endfor %}</div>{% endif %}
 {% endwith %}
 
-{% if not admin_mode %}
-<section class="hero"><div class="wrap"><h2>Tu estilo empieza en <strong>Goldens</strong></h2><p>Elegí servicio, barbero, fecha, hora y cómo vas a pagar.</p><a class="btn gold" href="#reservar">Reservar ahora</a></div></section>
+{% if admin_mode %}
+<div class="app">
+<aside class="sidebar">
+  <div class="brand">
+    <div class="logo">G</div>
+    <div><h1>GOLDENS</h1><small>BARBERSHOP</small></div>
+  </div>
+  <div class="nav-title">OPERACIÓN</div>
+  <nav class="nav">
+    <a href="#inicio" class="active"><span class="ico">🏠</span><span>Inicio</span></a>
+    <a href="#agenda"><span class="ico">🗓️</span><span>Agenda</span></a>
+    <a href="#barberos"><span class="ico">♟️</span><span>Barberos</span></a>
+    <a href="#servicios"><span class="ico">✂</span><span>Servicios</span></a>
+    <a href="#productos"><span class="ico">📦</span><span>Productos</span></a>
+    <a href="#alertas"><span class="ico">🔔</span><span>Alertas</span></a>
+  </nav>
+  <div class="side-foot">MÁS QUE UN CORTE,<br>ES TU ESTILO</div>
+</aside>
 
-<section class="section"><div class="wrap"><h3>Servicios</h3><p class="sub">Precios claros antes de reservar.</p><div class="grid g3">
-{% for s in services %}<div class="card"><div class="photo">{% if service_photos.get(s.id) %}<img src="{{service_photos.get(s.id)}}" alt="{{s.name}}">{% else %}✂{% endif %}</div><h4>{{s.name}}</h4><div class="meta">{{s.duration}} min aprox.</div><div class="price">{{s.price|money}}</div></div>{% endfor %}
-</div></div></section>
+<main class="main">
+<section id="inicio" class="section-anchor">
+  <div class="top">
+    <div><h2><span>Goldens</span> Agenda</h2><p>Control de citas, servicios y productos.</p></div>
+    <div class="top-actions">
+      <a class="bell" href="#alertas" title="Alertas">🔔</a>
+      <a class="btn btn-dark" href="/admin/logout">Modo cliente</a>
+      <button class="btn btn-gold" onclick="bookingDlg.showModal()">+ Agendar cita</button>
+    </div>
+  </div>
 
-<section class="section"><div class="wrap"><h3>Barberos</h3><p class="sub">Elegí quién querés que te atienda.</p><div class="grid g4">
-{% for b in barbers %}<div class="card barber"><div class="avatar">{% if barber_photos.get(b.id) %}<img src="{{barber_photos.get(b.id)}}" alt="{{b.name}}">{% elif b.photo_url %}<img src="{{b.photo_url}}" alt="{{b.name}}">{% else %}{{b.name[0]|upper}}{% endif %}</div><h4>{{b.name}}</h4><div class="meta">{{b.specialty or "Disponible para reservas"}}</div></div>{% endfor %}
-</div></div></section>
+  <div class="cards">
+    <div class="stat-card"><div class="stat-ico">🗓️</div><div><small>Citas de hoy</small><strong>{{today_count}}</strong><em>Programadas para hoy</em></div></div>
+    <div class="stat-card"><div class="stat-ico">✂</div><div><small>Servicios activos</small><strong>{{services|length}}</strong><em>Disponibles para reservas</em></div></div>
+    <div class="stat-card"><div class="stat-ico">📦</div><div><small>Productos</small><strong>{{products|length}}</strong><em>Con stock visible</em></div></div>
+  </div>
 
-<section class="section"><div class="wrap"><h3>Productos</h3><p class="sub">Productos disponibles en Goldens.</p><div class="grid g3">
-{% if products %}{% for p in products %}<div class="card"><div class="photo">{% if product_photos.get(p.id) %}<img src="{{product_photos.get(p.id)}}" alt="{{p.name}}">{% else %}G{% endif %}</div><h4>{{p.name}}</h4><div class="price">{{p.price|money}}</div></div>{% endfor %}{% else %}<div class="card">Próximamente productos disponibles.</div>{% endif %}
-</div></div></section>
+  <div class="panel">
+    <div class="panel-head"><div><h3>Agenda de hoy</h3><p>Citas programadas para el día de hoy.</p></div><a class="btn btn-dark" href="#agenda">Ver agenda ›</a></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Hora</th><th>Cliente</th><th>Servicio</th><th>Barbero</th><th>Estado</th></tr></thead>
+        <tbody>
+        {% set ns = namespace(found=false) %}
+        {% for a in appointments %}
+          {% if a.appointment_date.isoformat() == today %}
+          {% set ns.found = true %}
+          <tr>
+            <td><strong>{{a.appointment_time.strftime("%H:%M")}}</strong></td>
+            <td>{{a.client.name|upper}}</td>
+            <td>{{a.service.name}}</td>
+            <td>{{a.barber.name|upper}}</td>
+            <td><span class="badge gold">{{a.status}}</span></td>
+          </tr>
+          {% endif %}
+        {% endfor %}
+        {% if not ns.found %}<tr><td colspan="5" style="color:#777;text-align:center;padding:18px">No hay citas para hoy.</td></tr>{% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
 
-<section class="section" id="reservar"><div class="wrap"><div class="card"><h3>Agenda tu cita</h3><p class="sub">Seleccioná todos los datos de tu reserva.</p>
-<form method="post" action="/reservar" class="form">
-<div class="field"><label>Nombre</label><input name="name" required></div>
-<div class="field"><label>WhatsApp</label><input name="phone" required placeholder="8888-8888"></div>
-<div class="field"><label>Servicio</label><select name="service_id" required>{% for s in services %}<option value="{{s.id}}">{{s.name}} — {{s.price|money}}</option>{% endfor %}</select></div>
-<div class="field"><label>Barbero</label><select name="barber_id" id="barber" required>{% for b in barbers %}<option value="{{b.id}}">{{b.name}}</option>{% endfor %}</select></div>
-<div class="field"><label>Fecha</label><input type="date" name="appointment_date" id="date" min="{{today}}" value="{{today}}" required></div>
-<div class="field"><label>Hora disponible</label><select name="appointment_time" id="time" required><option value="">Cargando...</option></select></div>
-<div class="field"><label>Forma de pago</label><select name="payment_method" required><option value="">Seleccioná</option><option value="Efectivo">Efectivo</option><option value="SINPE Móvil">SINPE Móvil</option></select></div>
-<div class="field full"><label>Comentario opcional</label><textarea name="notes" rows="3"></textarea></div>
-<div class="field full"><button class="btn gold" type="submit">Confirmar reserva</button></div>
-</form></div>
-<div class="loginlink"><a href="#admin-login">Acceso administrador</a></div>
-</div></section>
+<section id="agenda" class="panel section-anchor">
+  <div class="panel-head"><div><h3>Agenda completa</h3><p>Clientes, servicio, barbero, forma de pago y estado.</p></div><button class="btn btn-gold" onclick="bookingDlg.showModal()">+ Nueva cita</button></div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Fecha</th><th>Hora</th><th>Cliente</th><th>WhatsApp</th><th>Servicio</th><th>Barbero</th><th>Precio</th><th>Pago</th><th>Estado</th><th>Acciones</th></tr></thead>
+      <tbody>
+      {% for a in appointments %}
+      <tr>
+        <td>{{a.appointment_date.strftime("%d/%m/%Y")}}</td>
+        <td><strong>{{a.appointment_time.strftime("%H:%M")}}</strong></td>
+        <td>{{a.client.name|upper}}</td>
+        <td>{{a.client.phone}}</td>
+        <td>{{a.service.name}}</td>
+        <td>{{a.barber.name|upper}}</td>
+        <td>{{a.price|money}}</td>
+        <td><span class="badge">{{a.payment_method or "No indicado"}}</span></td>
+        <td><span class="badge">{{a.status}}</span></td>
+        <td class="actions">
+          <a class="btn btn-green" href="/admin/appointment/{{a.id}}/whatsapp" target="_blank">WhatsApp</a>
+          <form method="post" action="/admin/appointment/{{a.id}}/status" style="display:flex;gap:5px">
+            <select name="status">
+              <option {% if a.status=="Confirmada" %}selected{% endif %}>Confirmada</option>
+              <option {% if a.status=="Pendiente" %}selected{% endif %}>Pendiente</option>
+              <option {% if a.status=="Atendida" %}selected{% endif %}>Atendida</option>
+              <option {% if a.status=="Cancelada" %}selected{% endif %}>Cancelada</option>
+              <option {% if a.status=="No llegó" %}selected{% endif %}>No llegó</option>
+            </select>
+            <button class="btn btn-dark">OK</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+      {% if not appointments %}<tr><td colspan="10" style="text-align:center;color:#777;padding:18px">No hay citas registradas.</td></tr>{% endif %}
+      </tbody>
+    </table>
+  </div>
+</section>
 
-<section id="admin-login" class="section"><div class="wrap"><div class="card loginbox"><h3>Administrador</h3><form method="post" action="/admin/login" class="form">
-<div class="field full"><label>Usuario</label><input name="user" value="admin" required></div>
-<div class="field full"><label>PIN</label><input name="pin" type="password" required></div>
-<div class="field full"><button class="btn dark">Ingresar</button></div>
-</form></div></div></section>
+<section id="barberos" class="panel section-anchor">
+  <div class="panel-head"><div><h3>Barberos</h3><p>Administrá equipo, especialidad, fotos y estado.</p></div></div>
+  <div class="manage-grid">
+    <div class="manage-card">
+      <h4>+ Nuevo barbero</h4>
+      <form method="post" action="/admin/barber" enctype="multipart/form-data">
+        <div class="field"><label>Nombre</label><input name="name" required></div>
+        <div class="field"><label>Especialidad</label><input name="specialty"></div>
+        <div class="field"><label>Foto</label><input type="file" name="photo" accept="image/*"></div>
+        <button class="btn btn-gold">Agregar</button>
+      </form>
+    </div>
+    {% for b in admin_barbers %}
+    <div class="manage-card">
+      <div class="thumb">{% if barber_photos.get(b.id) %}<img src="{{barber_photos.get(b.id)}}">{% elif b.photo_url %}<img src="{{b.photo_url}}">{% else %}{{b.name[0]|upper}}{% endif %}</div>
+      <h4>{{b.name}}</h4>
+      <form method="post" action="/admin/barber/{{b.id}}/update" enctype="multipart/form-data">
+        <div class="field"><label>Nombre</label><input name="name" value="{{b.name}}" required></div>
+        <div class="field"><label>Especialidad</label><input name="specialty" value="{{b.specialty or ''}}"></div>
+        <div class="field"><label>Estado</label><select name="active"><option value="true" {% if b.active %}selected{% endif %}>Activo</option><option value="false" {% if not b.active %}selected{% endif %}>Oculto</option></select></div>
+        <div class="field"><label>Cambiar foto</label><input type="file" name="photo" accept="image/*"></div>
+        <button class="btn btn-dark">Guardar</button>
+      </form>
+      <form method="post" action="/admin/barber/{{b.id}}/remove" style="margin-top:6px"><button class="btn btn-danger" style="width:100%">Quitar</button></form>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section id="servicios" class="panel section-anchor">
+  <div class="panel-head"><div><h3>Servicios</h3><p>Precios, duración, imágenes y disponibilidad.</p></div></div>
+  <div class="manage-grid">
+    <div class="manage-card">
+      <h4>+ Nuevo servicio</h4>
+      <form method="post" action="/admin/service" enctype="multipart/form-data">
+        <div class="field"><label>Nombre</label><input name="name" required></div>
+        <div class="manage-row"><div class="field"><label>Precio ₡</label><input name="price" type="number" required></div><div class="field"><label>Duración</label><input name="duration" type="number" value="30"></div></div>
+        <div class="field"><label>Foto</label><input type="file" name="photo" accept="image/*"></div>
+        <button class="btn btn-gold">Agregar</button>
+      </form>
+    </div>
+    {% for s in admin_services %}
+    <div class="manage-card">
+      <div class="thumb">{% if service_photos.get(s.id) %}<img src="{{service_photos.get(s.id)}}">{% else %}✂{% endif %}</div>
+      <h4>{{s.name}}</h4>
+      <form method="post" action="/admin/service/{{s.id}}/update" enctype="multipart/form-data">
+        <div class="field"><label>Nombre</label><input name="name" value="{{s.name}}" required></div>
+        <div class="manage-row"><div class="field"><label>Precio ₡</label><input name="price" type="number" value="{{s.price}}" required></div><div class="field"><label>Duración</label><input name="duration" type="number" value="{{s.duration}}" required></div></div>
+        <div class="field"><label>Estado</label><select name="active"><option value="true" {% if s.active %}selected{% endif %}>Activo</option><option value="false" {% if not s.active %}selected{% endif %}>Oculto</option></select></div>
+        <div class="field"><label>Cambiar foto</label><input type="file" name="photo" accept="image/*"></div>
+        <button class="btn btn-dark">Guardar</button>
+      </form>
+      <form method="post" action="/admin/service/{{s.id}}/remove" style="margin-top:6px"><button class="btn btn-danger" style="width:100%">Quitar</button></form>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section id="productos" class="panel section-anchor">
+  <div class="panel-head"><div><h3>Productos</h3><p>Inventario, precio, imagen y visibilidad para el cliente.</p></div></div>
+  <div class="manage-grid">
+    <div class="manage-card">
+      <h4>+ Nuevo producto</h4>
+      <form method="post" action="/admin/product" enctype="multipart/form-data">
+        <div class="field"><label>Nombre</label><input name="name" required></div>
+        <div class="manage-row"><div class="field"><label>Precio ₡</label><input name="price" type="number" required></div><div class="field"><label>Stock</label><input name="stock" type="number" value="1"></div></div>
+        <div class="field"><label>Foto</label><input type="file" name="photo" accept="image/*"></div>
+        <button class="btn btn-gold">Agregar</button>
+      </form>
+    </div>
+    {% for p in admin_products %}
+    <div class="manage-card">
+      <div class="thumb">{% if product_photos.get(p.id) %}<img src="{{product_photos.get(p.id)}}">{% else %}📦{% endif %}</div>
+      <h4>{{p.name}}</h4>
+      <form method="post" action="/admin/product/{{p.id}}/update" enctype="multipart/form-data">
+        <div class="field"><label>Nombre</label><input name="name" value="{{p.name}}" required></div>
+        <div class="manage-row"><div class="field"><label>Precio ₡</label><input name="price" type="number" value="{{p.price}}" required></div><div class="field"><label>Stock</label><input name="stock" type="number" value="{{p.stock}}" required></div></div>
+        <div class="field"><label>Estado</label><select name="active"><option value="true" {% if p.active %}selected{% endif %}>Activo</option><option value="false" {% if not p.active %}selected{% endif %}>Oculto</option></select></div>
+        <div class="field"><label>Cambiar foto</label><input type="file" name="photo" accept="image/*"></div>
+        <button class="btn btn-dark">Guardar</button>
+      </form>
+      <form method="post" action="/admin/product/{{p.id}}/remove" style="margin-top:6px"><button class="btn btn-danger" style="width:100%">Quitar</button></form>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section id="alertas" class="panel section-anchor">
+  <div class="panel-head"><div><h3>Alertas</h3><p>Próximas citas y espacios a revisar.</p></div></div>
+  <div class="mini-grid">
+    {% for a in appointments[:6] %}
+    <div class="mini-card"><h5>{{a.client.name}}</h5><div class="muted">{{a.appointment_date.strftime("%d/%m/%Y")}} · {{a.appointment_time.strftime("%H:%M")}}</div><div>{{a.service.name}} · {{a.barber.name}}</div><div style="margin-top:8px"><span class="badge">{{a.status}}</span></div></div>
+    {% endfor %}
+    {% if not appointments %}<div class="mini-card">No hay alertas de citas pendientes.</div>{% endif %}
+  </div>
+</section>
+</main>
+</div>
+
+<dialog id="bookingDlg">
+  <div class="modal-head"><strong>+ Agendar cita</strong><button class="x" onclick="bookingDlg.close()">×</button></div>
+  <div class="modal-body">
+    <form method="post" action="/reservar" class="booking" style="margin:0">
+      <div class="form-grid">
+        <div class="field"><label>Nombre</label><input name="name" required></div>
+        <div class="field"><label>WhatsApp</label><input name="phone" required placeholder="8888-8888"></div>
+        <div class="field"><label>Servicio</label><select name="service_id" required>{% for s in services %}<option value="{{s.id}}">{{s.name}} — {{s.price|money}}</option>{% endfor %}</select></div>
+        <div class="field"><label>Barbero</label><select name="barber_id" id="adminBarber" required>{% for b in barbers %}<option value="{{b.id}}">{{b.name}}</option>{% endfor %}</select></div>
+        <div class="field"><label>Fecha</label><input type="date" name="appointment_date" id="adminDate" min="{{today}}" value="{{today}}" required></div>
+        <div class="field"><label>Hora disponible</label><select name="appointment_time" id="adminTime" required><option value="">Cargando...</option></select></div>
+        <div class="field"><label>Forma de pago</label><select name="payment_method" required><option value="">Seleccioná</option><option value="Efectivo">Efectivo</option><option value="SINPE Móvil">SINPE Móvil</option></select></div>
+        <div class="field full"><label>Notas</label><textarea name="notes" rows="3"></textarea></div>
+        <div class="field full"><button class="btn btn-gold" type="submit">Guardar cita</button></div>
+      </div>
+    </form>
+  </div>
+</dialog>
 
 <script>
-async function loadSlots(){
- const date=document.getElementById('date').value, barber=document.getElementById('barber').value, time=document.getElementById('time');
- if(!date||!barber){return}
- time.innerHTML='<option value="">Cargando...</option>';
- try{
-  const r=await fetch('/api/slots?date='+encodeURIComponent(date)+'&barber_id='+encodeURIComponent(barber));
-  const j=await r.json();
-  time.innerHTML=j.slots.length?j.slots.map(x=>'<option value="'+x+'">'+x+'</option>').join(''):'<option value="">Sin espacios disponibles</option>';
- }catch(e){time.innerHTML='<option value="">Error cargando horarios</option>'}
+async function adminLoadSlots(){
+  const date=document.getElementById('adminDate')?.value, barber=document.getElementById('adminBarber')?.value, time=document.getElementById('adminTime');
+  if(!date||!barber||!time) return;
+  time.innerHTML='<option value="">Cargando...</option>';
+  try{
+    const r=await fetch('/api/slots?date='+encodeURIComponent(date)+'&barber_id='+encodeURIComponent(barber),{cache:'no-store'});
+    const j=await r.json();
+    time.innerHTML=j.slots.length?j.slots.map(x=>'<option value="'+x+'">'+x+'</option>').join(''):'<option value="">Sin espacios disponibles</option>';
+  }catch(e){time.innerHTML='<option value="">Error cargando horarios</option>'}
 }
-document.getElementById('date').addEventListener('change',loadSlots);
-document.getElementById('barber').addEventListener('change',loadSlots);
-loadSlots();
+document.getElementById('adminDate')?.addEventListener('change',adminLoadSlots);
+document.getElementById('adminBarber')?.addEventListener('change',adminLoadSlots);
+document.querySelectorAll('.nav a').forEach(a=>a.addEventListener('click',()=>{document.querySelectorAll('.nav a').forEach(x=>x.classList.remove('active'));a.classList.add('active')}));
+adminLoadSlots();
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js").catch(()=>{}));}
 </script>
 
 {% else %}
-<div class="admin">
-<div class="stats">
-<div class="stat"><small>Citas hoy</small><strong>{{today_count}}</strong></div>
-<div class="stat"><small>Clientes</small><strong>{{clients_count}}</strong></div>
-<div class="stat"><small>Barberos activos</small><strong>{{barbers|length}}</strong></div>
-<div class="stat"><small>Servicios activos</small><strong>{{services|length}}</strong></div>
+<div class="client-shell">
+  <div class="client-top">
+    <div class="brand"><div class="logo">G</div><div><h1>GOLDENS</h1><small>BARBERSHOP</small></div></div>
+    <a class="btn btn-dark" href="#admin-login">Administrador</a>
+  </div>
+
+  <div class="client-hero">
+    <h1>Agenda tu cita en <span>Goldens</span></h1>
+    <p>Elegí servicio, barbero, horario y forma de pago.</p>
+    <a class="btn btn-gold" href="#reservar">Agendar ahora</a>
+  </div>
+
+  <section class="section-anchor">
+    <div class="panel-head"><div><h3>Servicios</h3><p>Precios visibles antes de reservar.</p></div></div>
+    <div class="client-grid">
+      {% for s in services %}
+      <div class="client-card"><div class="thumb">{% if service_photos.get(s.id) %}<img src="{{service_photos.get(s.id)}}">{% else %}✂{% endif %}</div><h4>{{s.name}}</h4><div class="meta">{{s.duration}} min</div><div class="price">{{s.price|money}}</div></div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="section-anchor" style="margin-top:16px">
+    <div class="panel-head"><div><h3>Barberos</h3><p>Seleccioná quién querés que te atienda.</p></div></div>
+    <div class="client-grid">
+      {% for b in barbers %}
+      <div class="client-card"><div class="thumb">{% if barber_photos.get(b.id) %}<img src="{{barber_photos.get(b.id)}}">{% elif b.photo_url %}<img src="{{b.photo_url}}">{% else %}{{b.name[0]|upper}}{% endif %}</div><h4>{{b.name}}</h4><div class="meta">{{b.specialty or "Disponible para reservas"}}</div></div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="section-anchor" style="margin-top:16px">
+    <div class="panel-head"><div><h3>Productos</h3><p>Disponibles en Goldens.</p></div></div>
+    <div class="client-grid">
+      {% for p in products %}
+      <div class="client-card"><div class="thumb">{% if product_photos.get(p.id) %}<img src="{{product_photos.get(p.id)}}">{% else %}📦{% endif %}</div><h4>{{p.name}}</h4><div class="price">{{p.price|money}}</div></div>
+      {% endfor %}
+      {% if not products %}<div class="client-card">No hay productos visibles actualmente.</div>{% endif %}
+    </div>
+  </section>
+
+  <section id="reservar" class="booking section-anchor">
+    <div class="panel-head"><div><h3>Reservá tu cita</h3><p>Completá tus datos.</p></div></div>
+    <form method="post" action="/reservar" class="form-grid">
+      <div class="field"><label>Nombre</label><input name="name" required></div>
+      <div class="field"><label>WhatsApp</label><input name="phone" required placeholder="8888-8888"></div>
+      <div class="field"><label>Servicio</label><select name="service_id" required>{% for s in services %}<option value="{{s.id}}">{{s.name}} — {{s.price|money}}</option>{% endfor %}</select></div>
+      <div class="field"><label>Barbero</label><select name="barber_id" id="barber" required>{% for b in barbers %}<option value="{{b.id}}">{{b.name}}</option>{% endfor %}</select></div>
+      <div class="field"><label>Fecha</label><input type="date" name="appointment_date" id="date" min="{{today}}" value="{{today}}" required></div>
+      <div class="field"><label>Hora disponible</label><select name="appointment_time" id="time" required><option value="">Cargando...</option></select></div>
+      <div class="field"><label>Forma de pago</label><select name="payment_method" required><option value="">Seleccioná</option><option value="Efectivo">Efectivo</option><option value="SINPE Móvil">SINPE Móvil</option></select></div>
+      <div class="field full"><label>Comentario opcional</label><textarea name="notes" rows="3"></textarea></div>
+      <div class="field full"><button class="btn btn-gold">Confirmar reserva</button></div>
+    </form>
+  </section>
+
+  <section id="admin-login" class="booking section-anchor" style="max-width:430px;margin:18px auto">
+    <div class="panel-head"><div><h3>Acceso administrador</h3></div></div>
+    <form method="post" action="/admin/login">
+      <div class="field"><label>Usuario</label><input name="user" value="admin" required></div>
+      <div class="field"><label>PIN</label><input name="pin" type="password" required></div>
+      <button class="btn btn-dark" style="width:100%">Ingresar</button>
+    </form>
+  </section>
 </div>
 
-<div class="admin-grid">
-<div class="admin-card"><h3>+ Barbero</h3><form method="post" action="/admin/barber" enctype="multipart/form-data"><div class="field"><label>Nombre</label><input name="name" required></div><div class="field"><label>Especialidad</label><input name="specialty"></div><div class="field"><label>Foto</label><input type="file" name="photo" accept="image/*"></div><button class="btn gold" style="margin-top:10px">Agregar</button></form></div>
-<div class="admin-card"><h3>+ Servicio</h3><form method="post" action="/admin/service" enctype="multipart/form-data"><div class="field"><label>Nombre</label><input name="name" required></div><div class="field"><label>Precio ₡</label><input name="price" type="number" required></div><div class="field"><label>Duración</label><input name="duration" type="number" value="30"></div><div class="field"><label>Foto</label><input type="file" name="photo" accept="image/*"></div><button class="btn gold" style="margin-top:10px">Agregar</button></form></div>
-<div class="admin-card"><h3>+ Producto</h3><form method="post" action="/admin/product" enctype="multipart/form-data"><div class="field"><label>Nombre</label><input name="name" required></div><div class="field"><label>Precio ₡</label><input name="price" type="number" required></div><div class="field"><label>Stock</label><input name="stock" type="number" value="1"></div><div class="field"><label>Foto</label><input type="file" name="photo" accept="image/*"></div><button class="btn gold" style="margin-top:10px">Agregar</button></form></div>
-</div>
-
-<div class="admin-card"><h3>Administrar barberos</h3><div class="manage-grid">
-{% for b in admin_barbers %}<div class="manage"><div class="thumb">{% if barber_photos.get(b.id) %}<img src="{{barber_photos.get(b.id)}}">{% else %}{{b.name[0]|upper}}{% endif %}</div>
-<form method="post" action="/admin/barber/{{b.id}}/update" enctype="multipart/form-data"><div class="field"><label>Nombre</label><input name="name" value="{{b.name}}" required></div><div class="field"><label>Especialidad</label><input name="specialty" value="{{b.specialty or ''}}"></div><div class="field"><label>Estado</label><select name="active"><option value="true" {% if b.active %}selected{% endif %}>Activo</option><option value="false" {% if not b.active %}selected{% endif %}>Oculto</option></select></div><div class="field"><label>Cambiar foto</label><input type="file" name="photo" accept="image/*"></div><button class="btn dark" style="margin-top:8px">Guardar</button></form>
-<form method="post" action="/admin/barber/{{b.id}}/remove"><button class="btn danger" style="margin-top:7px;width:100%">Quitar</button></form></div>{% endfor %}
-</div></div>
-
-<div class="admin-card"><h3>Administrar servicios</h3><div class="manage-grid">
-{% for s in admin_services %}<div class="manage"><div class="thumb">{% if service_photos.get(s.id) %}<img src="{{service_photos.get(s.id)}}">{% else %}✂{% endif %}</div>
-<form method="post" action="/admin/service/{{s.id}}/update" enctype="multipart/form-data"><div class="field"><label>Nombre</label><input name="name" value="{{s.name}}" required></div><div class="field"><label>Precio ₡</label><input name="price" type="number" value="{{s.price}}" required></div><div class="field"><label>Duración</label><input name="duration" type="number" value="{{s.duration}}" required></div><div class="field"><label>Estado</label><select name="active"><option value="true" {% if s.active %}selected{% endif %}>Activo</option><option value="false" {% if not s.active %}selected{% endif %}>Oculto</option></select></div><div class="field"><label>Cambiar foto</label><input type="file" name="photo" accept="image/*"></div><button class="btn dark" style="margin-top:8px">Guardar</button></form>
-<form method="post" action="/admin/service/{{s.id}}/remove"><button class="btn danger" style="margin-top:7px;width:100%">Quitar</button></form></div>{% endfor %}
-</div></div>
-
-<div class="admin-card"><h3>Administrar productos</h3><div class="manage-grid">
-{% for p in admin_products %}<div class="manage"><div class="thumb">{% if product_photos.get(p.id) %}<img src="{{product_photos.get(p.id)}}">{% else %}G{% endif %}</div>
-<form method="post" action="/admin/product/{{p.id}}/update" enctype="multipart/form-data"><div class="field"><label>Nombre</label><input name="name" value="{{p.name}}" required></div><div class="field"><label>Precio ₡</label><input name="price" type="number" value="{{p.price}}" required></div><div class="field"><label>Stock</label><input name="stock" type="number" value="{{p.stock}}" required></div><div class="field"><label>Estado</label><select name="active"><option value="true" {% if p.active %}selected{% endif %}>Activo</option><option value="false" {% if not p.active %}selected{% endif %}>Oculto</option></select></div><div class="field"><label>Cambiar foto</label><input type="file" name="photo" accept="image/*"></div><button class="btn dark" style="margin-top:8px">Guardar</button></form>
-<form method="post" action="/admin/product/{{p.id}}/remove"><button class="btn danger" style="margin-top:7px;width:100%">Quitar</button></form></div>{% endfor %}
-</div></div>
-
-<div class="admin-card"><h3>Agenda completa</h3><div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Hora</th><th>Cliente</th><th>WhatsApp</th><th>Servicio</th><th>Barbero</th><th>Precio</th><th>Pago</th><th>Estado</th><th>Acciones</th></tr></thead><tbody>
-{% for a in appointments %}<tr><td>{{a.appointment_date.strftime("%d/%m/%Y")}}</td><td>{{a.appointment_time.strftime("%H:%M")}}</td><td>{{a.client.name}}</td><td>{{a.client.phone}}</td><td>{{a.service.name}}</td><td>{{a.barber.name}}</td><td>{{a.price|money}}</td><td><span class="badge">{{a.payment_method or "No indicado"}}</span></td><td><span class="badge">{{a.status}}</span></td><td class="actions"><a class="btn green" href="/admin/appointment/{{a.id}}/whatsapp" target="_blank">WhatsApp</a><form method="post" action="/admin/appointment/{{a.id}}/status"><select name="status"><option {% if a.status=="Confirmada" %}selected{% endif %}>Confirmada</option><option {% if a.status=="Pendiente" %}selected{% endif %}>Pendiente</option><option {% if a.status=="Atendida" %}selected{% endif %}>Atendida</option><option {% if a.status=="Cancelada" %}selected{% endif %}>Cancelada</option><option {% if a.status=="No llegó" %}selected{% endif %}>No llegó</option></select><button class="btn dark">OK</button></form></td></tr>{% endfor %}
-</tbody></table></div></div>
-</div>
+<script>
+async function loadSlots(){
+  const date=document.getElementById('date')?.value, barber=document.getElementById('barber')?.value, time=document.getElementById('time');
+  if(!date||!barber||!time)return;
+  time.innerHTML='<option value="">Cargando...</option>';
+  try{
+    const r=await fetch('/api/slots?date='+encodeURIComponent(date)+'&barber_id='+encodeURIComponent(barber),{cache:'no-store'});
+    const j=await r.json();
+    time.innerHTML=j.slots.length?j.slots.map(x=>'<option value="'+x+'">'+x+'</option>').join(''):'<option value="">Sin espacios disponibles</option>';
+  }catch(e){time.innerHTML='<option value="">Error cargando horarios</option>'}
+}
+document.getElementById('date')?.addEventListener('change',loadSlots);
+document.getElementById('barber')?.addEventListener('change',loadSlots);
+loadSlots();
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js").catch(()=>{}));}
+</script>
 {% endif %}
-<script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js").catch(()=>{}));}</script></body></html>
+</body>
+</html>
