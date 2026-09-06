@@ -13,6 +13,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import UniqueConstraint, inspect, text
 from werkzeug.utils import secure_filename
+from itsdangerous import URLSafeSerializer, BadSignature
 
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", "goldens-local-dev")
@@ -366,8 +367,16 @@ def confirmation_message(ap):
         f"Hora: {ap.appointment_time.strftime('%H:%M')}\n"
         f"Precio: {money(ap.price)}\n"
         f"Método de pago: {ap.payment_method or 'No indicado'}\n\n"
+        f"Cancelar cita: {appointment_cancel_url(ap)}\n\n"
         "Te esperamos en Goldens Barbershop."
     )
+
+def appointment_cancel_token(ap):
+    s = URLSafeSerializer(app.config["SECRET_KEY"], salt="goldens-appointment-cancel")
+    return s.dumps({"appointment_id": ap.id, "phone": ap.client.phone})
+
+def appointment_cancel_url(ap):
+    return url_for("client_cancel_appointment", token=appointment_cancel_token(ap), _external=True)
 
 def wa_link(phone, message):
     number = normalize_phone(phone)
@@ -478,7 +487,30 @@ def reserve():
         return redirect(url_for("public_home"))
 
     client_to_goldens = wa_link(GOLDENS_WHATSAPP_NUMBER, booking_message(ap)) if GOLDENS_WHATSAPP_NUMBER else ""
-    return render_template("ticket.html", ap=ap, client_to_goldens=client_to_goldens)
+    return render_template("ticket.html", ap=ap, client_to_goldens=client_to_goldens, cancel_url=appointment_cancel_url(ap))
+
+@app.route("/cancelar-cita/<token>", methods=["POST"])
+def client_cancel_appointment(token):
+    s = URLSafeSerializer(app.config["SECRET_KEY"], salt="goldens-appointment-cancel")
+    try:
+        data = s.loads(token)
+    except BadSignature:
+        flash("El enlace para cancelar la cita no es válido.", "error")
+        return redirect(url_for("public_home"))
+
+    ap = Appointment.query.get_or_404(int(data.get("appointment_id", 0)))
+    if ap.client.phone != data.get("phone"):
+        abort(403)
+
+    if ap.status == "Cancelada":
+        flash("Esta cita ya estaba cancelada.", "ok")
+    elif ap.status == "Atendida":
+        flash("Esta cita ya fue atendida y no se puede cancelar.", "error")
+    else:
+        ap.status = "Cancelada"
+        db.session.commit()
+        flash("Tu cita fue cancelada. El horario quedó disponible nuevamente.", "ok")
+    return redirect(url_for("public_home"))
 
 @app.route("/admin/login", methods=["POST"])
 def admin_login():
