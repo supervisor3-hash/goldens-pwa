@@ -9,5 +9,10 @@ body{margin:0;background:#070707;color:#f5f5f5;font-family:Arial,sans-serif}.wra
 <div class="row"><span>Precio</span><strong>{{ap.price|money}}</strong></div>
 <div class="row"><span>Forma de pago</span><strong>{{ap.payment_method or "No indicado"}}</strong></div>
 {% if client_to_goldens %}<a class="btn green" target="_blank" href="{{client_to_goldens}}">Enviar reserva por WhatsApp</a>{% endif %}
+{% if cancel_url %}
+<form method="post" action="{{cancel_url}}" onsubmit="return confirm('¿Seguro que deseas cancelar esta cita?');" style="display:inline">
+<button class="btn" type="submit" style="background:#fff1f1;color:#a12626;border:1px solid #9e3434;cursor:pointer">Cancelar mi cita</button>
+</form>
+{% endif %}
 <a class="btn gold" href="/">Volver a Goldens</a>
 </div></div></div></body></html>
