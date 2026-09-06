@@ -83,13 +83,17 @@ def _load_local_config():
     return {}
 
 _LOCAL_CONFIG = _load_local_config()
-GOLDENS_WHATSAPP_NUMBER = re.sub(
-    r"\D",
-    "",
-    os.getenv("GOLDENS_WHATSAPP_NUMBER", _LOCAL_CONFIG.get("whatsapp_number", ""))
-)
+_whatsapp_env = os.getenv("GOLDENS_WHATSAPP_NUMBER", "").strip()
+_whatsapp_raw = _whatsapp_env or _LOCAL_CONFIG.get("whatsapp_number", "")
+GOLDENS_WHATSAPP_NUMBER = re.sub(r"\D", "", _whatsapp_raw)
 
 
+
+@app.route("/whatsapp")
+def goldens_whatsapp():
+    number = GOLDENS_WHATSAPP_NUMBER or "50660158371"
+    message = "Hola Goldens, quiero información y agendar una cita."
+    return redirect(f"https://wa.me/{number}?text={quote(message)}")
 
 @app.route("/instalar")
 def instalar_pwa():
