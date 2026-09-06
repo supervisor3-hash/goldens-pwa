@@ -176,6 +176,9 @@ dialog{width:min(640px,94vw);border:1px solid #5a4918;border-radius:14px;backgro
             </select>
             <button class="btn btn-dark">OK</button>
           </form>
+          <form method="post" action="/admin/appointment/{{a.id}}/delete" onsubmit="return confirm('¿Seguro que deseas eliminar esta cita?');">
+            <button class="btn btn-danger" type="submit">Eliminar</button>
+          </form>
         </td>
       </tr>
       {% endfor %}
