@@ -515,6 +515,16 @@ def admin_whatsapp(ap_id):
     ap = Appointment.query.get_or_404(ap_id)
     return redirect(wa_link(ap.client.phone, confirmation_message(ap)))
 
+@app.route("/admin/appointment/<int:ap_id>/delete", methods=["POST"])
+@admin_required
+def admin_appointment_delete(ap_id):
+    ap = Appointment.query.get_or_404(ap_id)
+    client_name = ap.client.name if ap.client else "Cliente"
+    db.session.delete(ap)
+    db.session.commit()
+    flash(f"Cita de {client_name} eliminada.", "ok")
+    return redirect(url_for("public_home") + "#agenda")
+
 @app.route("/admin/barber", methods=["POST"])
 @admin_required
 def admin_barber_add():
