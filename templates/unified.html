@@ -2,433 +2,911 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Goldens Agenda</title>
-<link rel="manifest" href="/static/manifest.webmanifest">
-<meta name="theme-color" content="#080808">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Goldens Pro</title>
 <style>
 :root{
-  --bg:#050505;
-  --panel:#0f0f0f;
-  --panel2:#141414;
-  --gold:#d7b23a;
-  --gold2:#f1d56f;
-  --line:#2f2816;
-  --txt:#f5f5f5;
-  --muted:#8f8f8f;
-  --green:#0f5e32;
-  --green2:#1d8a4b;
+ --bg:#070707;--bg2:#0c0c0c;--panel:#111;--panel2:#171717;
+ --gold:#d6b34a;--gold2:#f4dc8a;--txt:#f5f5f5;--muted:#9a9a9a;
+ --line:#2e2919;--good:#5bc67a;--bad:#ee6868;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;font-family:Arial,Helvetica,sans-serif;background:
-radial-gradient(circle at 92% 0%,#2a2308 0%,#0b0b08 28%,#050505 68%);color:var(--txt)}
+body{margin:0;background:radial-gradient(circle at 85% 5%,#2a2108 0,#0a0a0a 34%,#050505 75%);color:var(--txt);font-family:Arial,Helvetica,sans-serif}
+a{color:inherit}
 button,input,select,textarea{font:inherit}
-a{text-decoration:none;color:inherit}
-.flash-wrap{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:1000;width:min(760px,92vw)}
-.flash{background:#17130a;border:1px solid #5c4a16;color:#f6de86;padding:12px 16px;border-radius:10px;box-shadow:0 14px 40px #000a;margin-bottom:8px}
-.app{min-height:100vh}
-.sidebar{position:fixed;left:0;top:0;bottom:0;width:148px;background:linear-gradient(180deg,#070707,#030303);border-right:1px solid #3b321c;padding:12px 10px;z-index:40}
-.brand{display:flex;align-items:center;gap:10px;padding:0 3px 18px}
-.brand-logo-img{width:128px;height:auto;display:block;object-fit:contain;filter:drop-shadow(0 0 14px #d6b34a16)}
-.brand h1{font-size:14px;letter-spacing:1.6px;margin:0}.brand small{display:block;color:#7e7e7e;font-size:9px;margin-top:2px}
-.nav-title{font-size:8px;color:#555;letter-spacing:1.7px;margin:10px 5px 7px}
-.nav a{display:flex;align-items:center;gap:9px;padding:10px 10px;border-radius:8px;color:#e9e9e9;font-size:12px;font-weight:800;margin-bottom:4px}
-.nav a:hover,.nav a.active{background:linear-gradient(90deg,#1c180c,#141109);color:#ffe58b}
-.nav .ico{width:16px;text-align:center}
-.side-foot{position:absolute;bottom:20px;left:0;right:0;text-align:center;color:#4d4d4d;font-size:7px;letter-spacing:2px;line-height:1.5}
-.main{margin-left:148px;min-height:100vh;padding:18px 18px 40px}
-.top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}
-.top h2{margin:0;color:#fff;font-size:21px}.top h2 span{color:var(--gold2)}.top p{margin:4px 0 0;color:#8c8c8c;font-size:11px}
-.top-actions{display:flex;gap:8px;align-items:center}
-.btn{border:1px solid transparent;border-radius:9px;padding:9px 12px;font-weight:900;cursor:pointer;font-size:11px}
-.btn-dark{background:#1a1a1a;color:#fff;border-color:#373737}.btn-dark:hover{background:#242424}
-.btn-gold{background:linear-gradient(135deg,#f0d56d,#ad841b);color:#090909}.btn-gold:hover{filter:brightness(1.05)}
-.btn-green{background:#0f5d31;color:#bdf7d2;border-color:#267749}.btn-danger{background:#371717;color:#ffb0b0;border-color:#6a2b2b}
-.bell{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#111;border:1px solid #3b321c;color:#f1d56f}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
-.stat-card{background:linear-gradient(180deg,#111,#0b0b0b);border:1px solid #3d351e;border-radius:14px;padding:16px;min-height:100px;display:flex;align-items:center;gap:14px;box-shadow:0 12px 36px #0005}
-.stat-ico{width:42px;height:42px;border:1px solid #564715;border-radius:50%;display:grid;place-items:center;font-size:20px;color:var(--gold2)}
-.stat-card small{display:block;color:#8b8b8b;font-size:9px;letter-spacing:1px;text-transform:uppercase}.stat-card strong{display:block;font-size:27px;color:var(--gold2);margin-top:4px}.stat-card em{display:block;color:#777;font-size:9px;font-style:normal;margin-top:4px}
-.panel{background:linear-gradient(180deg,#111,#0b0b0b);border:1px solid #342d1a;border-radius:14px;margin-bottom:12px;padding:12px}
-.panel-head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:8px}.panel-head h3{margin:0;font-size:15px}.panel-head p{margin:3px 0 0;color:#7d7d7d;font-size:9px}
-.table-wrap{overflow:auto;border-radius:10px}
-table{width:100%;border-collapse:collapse;min-width:850px;background:#0c0c0c}
-th{background:#151309;color:#f1d56f;font-size:8px;letter-spacing:.7px;text-transform:uppercase;padding:9px 8px;text-align:left}
-td{padding:10px 8px;border-bottom:1px solid #1d1d1d;font-size:9px;color:#eee;vertical-align:middle}
-td strong{font-size:10px}.badge{display:inline-block;padding:5px 8px;border-radius:999px;font-size:8px;font-weight:900;background:#242424;color:#fff}
-.badge.gold{background:#503d00;color:#ffe278;border:1px solid #7f6400}
-.badge.good{background:#123d24;color:#b9efc9}
-.actions{display:flex;gap:5px;flex-wrap:wrap;align-items:center}.actions select{min-width:95px}
-.section-anchor{scroll-margin-top:15px}
-.manage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.manage-card{background:#0b0b0b;border:1px solid #2b2618;border-radius:12px;padding:12px}
-.manage-card h4{margin:0 0 10px;font-size:13px;color:#f2d570}
-.manage-row{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-.field{display:flex;flex-direction:column;gap:5px;margin-bottom:8px}.field label{font-size:8px;color:#8f8f8f;text-transform:uppercase;letter-spacing:.6px}
-input,select,textarea{background:#070707;color:#fff;border:1px solid #333;border-radius:8px;padding:8px 9px;outline:none;font-size:10px}
-input:focus,select:focus,textarea:focus{border-color:#8c6f18}
-.thumb{height:100px;border:1px solid #2a2a2a;border-radius:9px;background:#070707;display:grid;place-items:center;overflow:hidden;margin-bottom:9px;color:#d7b23a;font-size:25px}.thumb img{width:100%;height:100%;object-fit:contain}
-.mini-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:9px}
-.mini-card{background:#0a0a0a;border:1px solid #2a2518;border-radius:10px;padding:10px}
-.mini-card h5{font-size:11px;margin:0 0 8px}.mini-card .muted{font-size:9px;color:#7e7e7e;margin-bottom:8px}
-.client-shell{max-width:1120px;margin:auto;padding:20px}.client-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.client-hero{text-align:center;padding:46px 15px 24px}.client-hero h1{font-size:38px;margin:0 0 10px}.client-hero h1 span{color:var(--gold2)}.client-hero p{color:#999;margin:0 0 18px}
-.client-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.client-card{background:#101010;border:1px solid #352f1d;border-radius:14px;padding:14px}.client-card .price{color:var(--gold2);font-size:22px;font-weight:900;margin-top:8px}
-.booking{margin-top:16px;background:#100e08;border:1px solid #574718;border-radius:14px;padding:15px}.booking .form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.full{grid-column:1/-1}
-dialog{width:min(640px,94vw);border:1px solid #5a4918;border-radius:14px;background:#0d0d0d;color:#fff;padding:0}.modal-head{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid #2a2519}.modal-body{padding:16px}.x{background:none;border:0;color:#aaa;font-size:22px;cursor:pointer}
-@media(max-width:900px){.sidebar{width:72px}.brand h1,.brand small,.nav span:not(.ico),.nav-title,.side-foot{display:none}.brand{justify-content:center}.brand-logo-img{width:58px}.main{margin-left:72px}.cards,.manage-grid{grid-template-columns:1fr}.client-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:620px){.main{padding:12px}.top{flex-direction:column}.cards,.client-grid,.booking .form-grid,.manage-row{grid-template-columns:1fr}.full{grid-column:auto}.client-hero h1{font-size:30px}.sidebar{width:58px}.main{margin-left:58px}.nav a{justify-content:center}.brand-logo-img{width:48px}}
+.btn{display:inline-block;border:0;border-radius:11px;padding:11px 15px;font-weight:800;cursor:pointer;text-decoration:none}
+.gold{background:linear-gradient(135deg,var(--gold2),#a27a12);color:#080808}
+.dark{background:#1d1d1d;color:#fff;border:1px solid #363636}
+.green{background:#163a22;color:#c8f3d4;border:1px solid #2b7041}
+.danger{background:#3a1717;color:#ffb8b8;border:1px solid #603030}
+.muted{color:var(--muted)}
+.badge{display:inline-block;padding:6px 10px;border-radius:999px;background:#282828;font-size:11px;font-weight:800}
+.badge.confirm{background:#41330d;color:#f6d875;border:1px solid #765e18}
+.flash{max-width:1180px;margin:14px auto;padding:12px 18px;border-radius:10px;background:#211a09;color:#f3d77c;border:1px solid #5b4817}
 
-/* CLIENTE — apariencia Goldens Agenda */
-.client-booking-shell{min-height:100vh;display:grid;grid-template-columns:minmax(0,1.9fr) minmax(350px,530px);background:#04090c}
-.client-visual{position:relative;min-height:100vh;padding:7.5vw 5.8vw 5vw;overflow:hidden;border-top:3px solid #173039}
-.client-copy{position:relative;z-index:2;max-width:330px}.client-copy h1{margin:0;font-size:clamp(35px,4vw,58px);line-height:.86;letter-spacing:-1.8px;font-weight:1000}.client-copy h1 .goldline{color:#d89d16;display:block}.client-copy h1 .smallline{color:#d89d16;display:block;font-size:.68em}
-.client-benefits{display:flex;gap:10px;margin-top:24px}.benefit{width:135px;min-height:105px;border:1px solid #8d6a13;border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-size:14px}.benefit b{font-size:27px;color:#dca51f;margin-bottom:8px}
-.client-copy .desc{font-size:14px;line-height:1.55;margin-top:15px;max-width:300px}.client-copy .motto{color:#bd8616;letter-spacing:4px;font-size:8px;margin-top:12px}
-.big-g-wrap{position:absolute;left:51%;top:48%;transform:translate(-50%,-50%);text-align:center;z-index:1}.big-g{width:min(34vw,430px);height:min(34vw,430px);object-fit:contain;filter:drop-shadow(0 18px 32px #0008)}.big-g-caption{color:#b98213;letter-spacing:7px;font-size:8px;margin-top:7px}
-.client-form-zone{min-height:100vh;background:#03090c;padding:15px 14px 15px 0;display:flex;align-items:flex-start;justify-content:center}
-.client-form-card{width:100%;max-width:440px;background:#f6f6f4;color:#111;border-radius:16px 16px 0 0;padding:20px 23px 18px;min-height:calc(100vh - 15px);box-shadow:0 15px 60px #0007}
-.client-form-logo{text-align:center}.client-form-logo img{width:105px;height:105px;object-fit:contain}.client-form-logo h2{font-size:27px;line-height:.9;margin:2px 0 2px;font-weight:1000;letter-spacing:.6px}.client-form-logo small{letter-spacing:6px;font-size:9px}.client-form-card h3{text-align:center;margin:15px 0 12px;font-size:20px}
-.booking-fields{display:grid;grid-template-columns:1fr 1fr;gap:8px}.booking-fields .span2{grid-column:1/-1}.client-form-card .field{gap:3px;margin:0}.client-form-card label{font-size:8px;color:#3f3f3f}.client-form-card input,.client-form-card select,.client-form-card textarea{background:#fff;color:#222;border:1px solid #d2d2d2;border-radius:6px;padding:8px 9px;font-size:11px;min-height:35px}.client-form-card textarea{min-height:55px;resize:vertical}
-.pay-options{display:grid;grid-template-columns:1fr 1fr;gap:7px}.pay-radio{position:relative}.pay-radio input{position:absolute;opacity:0;pointer-events:none}.pay-radio label{display:flex;align-items:center;justify-content:center;min-height:38px;border:1px solid #d2d2d2;border-radius:7px;background:#fff;font-size:11px;font-weight:900;cursor:pointer;color:#222}.pay-radio input:checked+label{border-color:#c79418;background:#fff6d7;box-shadow:inset 0 0 0 1px #c79418}
-.confirm-client{width:100%;border:0;border-radius:7px;background:linear-gradient(#e7b632,#c98600);color:#fff;font-weight:900;padding:11px;cursor:pointer;margin-top:1px}
-.client-back{text-align:center;font-size:10px;color:#777;margin-top:7px}.client-back a{color:#777}
-.cancel-box{margin-top:10px;border-top:1px solid #ddd;padding-top:8px}.cancel-box summary{list-style:none;text-align:center;color:#a32929;font-size:10px;font-weight:900;cursor:pointer}.cancel-box summary::-webkit-details-marker{display:none}.cancel-box .cancel-form{margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:6px}.cancel-box .cancel-form .span2{grid-column:1/-1}.cancel-submit{width:100%;border:1px solid #b13d3d;background:#fff4f4;color:#9f2424;border-radius:7px;padding:9px;font-weight:900;cursor:pointer}
-@media(max-width:980px){.client-booking-shell{grid-template-columns:1fr}.client-visual{min-height:500px;padding:55px 30px}.client-form-zone{min-height:auto;padding:0}.client-form-card{max-width:none;min-height:auto;border-radius:0}.big-g-wrap{left:70%}.big-g{width:min(45vw,350px);height:min(45vw,350px)}}
-@media(max-width:620px){.client-visual{min-height:440px;padding:42px 22px}.client-copy{max-width:230px}.client-benefits{gap:7px}.benefit{width:105px;min-height:92px;font-size:11px}.big-g-wrap{left:72%;top:54%}.big-g{width:190px;height:190px}.booking-fields{grid-template-columns:1fr}.booking-fields .span2,.cancel-box .cancel-form .span2{grid-column:auto}.client-form-zone{padding:0}.client-form-card{padding:18px 18px 22px}.cancel-box .cancel-form{grid-template-columns:1fr}}
+/* CLIENTE */
+.client-wrap{max-width:1160px;margin:auto;padding:0 20px}
+.client-top{min-height:78px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #2a2414;gap:14px}
+.brand{display:flex;align-items:center;gap:11px}
+.brand-logo{width:78px;height:78px;border-radius:50%;overflow:hidden;border:1px solid #745c16;background:#050505}
+.brand-logo img{width:100%;height:100%;object-fit:cover}
+.brand h1{margin:0;font-size:18px;letter-spacing:1.5px}
+.brand small{color:#888;letter-spacing:1.1px}
+.hero{text-align:center;padding:55px 0 30px}
+.hero h2{font-size:42px;max-width:780px;margin:0 auto 12px;line-height:1.08}
+.hero strong{color:var(--gold2)}
+.hero p{color:var(--muted);font-size:18px}
+.section{padding:28px 0}
+.section h3{font-size:28px;margin:0 0 6px}
+.sub{color:var(--muted);margin:0 0 18px}
+.grid{display:grid;gap:15px}
+.g4{grid-template-columns:repeat(4,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.card{background:linear-gradient(180deg,#151515,#0d0d0d);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 14px 38px #0006}
+.photo-card{height:180px;border-radius:12px;background:#090909;border:1px solid #2b281d;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:8px;margin-bottom:12px;color:#6d5c2d;font-size:34px}
+.photo-card img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block}
+.avatar{width:108px;height:108px;border-radius:50%;overflow:hidden;border:2px solid var(--gold);margin:0 auto 12px;background:#090909;display:grid;place-items:center;color:var(--gold);font-size:34px;font-weight:900}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.barber{text-align:center}
+.price{font-size:26px;font-weight:900;color:var(--gold2);margin-top:10px}
+.meta{font-size:13px;color:#888}
+.form{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.field{display:flex;flex-direction:column;gap:6px}
+.full{grid-column:1/-1}
+label{font-size:12px;color:#c9c9c9}
+input,select,textarea{background:#0a0a0a;color:#fff;border:1px solid #393939;border-radius:9px;padding:10px 11px;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--gold)}
+input[type=file]{padding:8px}
+dialog{width:min(460px,94vw);border:1px solid #554417;border-radius:16px;background:#0f0f0f;color:#fff;padding:0}
+dialog::backdrop{background:#000c}
+.modal-head{display:flex;justify-content:space-between;align-items:center;padding:17px 19px;border-bottom:1px solid #292929}
+.modal-body{padding:19px}
+.x{font-size:24px;background:none;border:0;color:#aaa;cursor:pointer}
+
+/* ADMIN PREMIUM */
+.admin-page{min-height:100vh;display:flex;background:radial-gradient(circle at 88% 5%,#2a2108 0,#0b0b0b 30%,#070707 70%)}
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:250px;background:linear-gradient(180deg,#070707,#050505);border-right:1px solid #2e2818;padding:20px 14px;z-index:30}
+.side-brand{display:flex;align-items:center;gap:11px;padding:4px 8px 28px}
+.side-logo{width:92px;height:92px;border-radius:50%;overflow:hidden;border:1px solid #6e5717;box-shadow:0 0 30px #d6b34a22}
+.side-logo img{width:100%;height:100%;object-fit:cover}
+.side-brand h2{margin:0;font-size:19px;letter-spacing:1.5px}
+.side-brand small{color:#888;letter-spacing:1px}
+.nav-label{font-size:10px;color:#656565;text-transform:uppercase;letter-spacing:1.2px;margin:14px 10px 6px}
+.side-nav a{display:flex;align-items:center;gap:12px;padding:13px 14px;margin:4px 0;border-radius:11px;text-decoration:none;color:#d6d6d6;font-weight:700}
+.side-nav a:hover,.side-nav a.active{background:linear-gradient(90deg,#31270b,#171309);color:var(--gold2);border-left:3px solid var(--gold)}
+.side-footer{position:absolute;left:14px;right:14px;bottom:22px;text-align:center;color:#686868;font-size:10px;letter-spacing:2px;line-height:1.6}
+.admin-main{margin-left:250px;width:calc(100% - 250px);padding:26px 28px 50px}
+.admin-head{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:18px}
+.admin-title h1{font-size:32px;margin:0}
+.admin-title h1 span{color:var(--gold2)}
+.admin-title p{margin:5px 0 0;color:#9a9a9a;font-size:16px}
+.head-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.bell{width:48px;height:48px;border-radius:50%;background:#121212;border:1px solid #413718;color:var(--gold2);display:grid;place-items:center;font-size:20px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:18px}
+.kpi{background:linear-gradient(180deg,#151515,#0d0d0d);border:1px solid #36301e;border-radius:17px;padding:20px;display:flex;align-items:center;gap:16px;min-height:150px;box-shadow:0 14px 34px #0005}
+.kpi-icon{width:60px;height:60px;border-radius:50%;border:1px solid #5d4d1e;background:#18150d;display:grid;place-items:center;font-size:27px;color:var(--gold2)}
+.kpi small{color:#aaa;text-transform:uppercase;letter-spacing:1px}
+.kpi strong{display:block;color:var(--gold2);font-size:42px;margin:3px 0}
+.kpi p{margin:0;color:#888;font-size:13px}
+.admin-card{background:linear-gradient(180deg,#141414,#0d0d0d);border:1px solid #312c1d;border-radius:17px;padding:18px;margin-top:16px;box-shadow:0 14px 34px #0005}
+.admin-card h3{margin:0 0 6px;font-size:22px}
+.section-title{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:13px}
+.table-wrap{overflow:auto;border-radius:12px}
+table{width:100%;border-collapse:collapse;min-width:900px;background:#101010}
+th,td{padding:12px 11px;border-bottom:1px solid #242424;text-align:left;font-size:13px;vertical-align:top}
+th{background:#17150d;color:var(--gold2);text-transform:uppercase;font-size:11px;letter-spacing:.9px}
+.manage-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,280px));gap:14px;margin-top:14px;align-items:start}
+.manage{background:#0b0b0b;border:1px solid #2c291d;border-radius:14px;padding:12px;max-width:280px}
+.thumb{height:120px;border-radius:10px;background:#080808;border:1px solid #252525;overflow:hidden;display:flex;align-items:center;justify-content:center;margin-bottom:10px;color:#6b5a2c}
+.thumb img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block}
+.thumb.round{width:90px;height:90px;border-radius:50%;margin:0 auto 10px}
+.quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.quick{background:#0b0b0b;border:1px solid #2c291d;border-radius:13px;padding:14px}
+.notice{padding:13px;border-radius:12px;border:1px solid #5a4815;background:#17130a;color:#d8c985;margin-top:14px}
+.admin-section{scroll-margin-top:20px}
+.mode-pill{padding:8px 11px;border-radius:999px;border:1px solid #5a4815;background:#17130a;color:var(--gold2);font-size:11px;font-weight:800}
+
+@media(max-width:1050px){
+ .kpis{grid-template-columns:1fr}
+ .quick-grid{grid-template-columns:1fr}
+ .g4{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:760px){
+ .sidebar{width:76px;padding:14px 8px}
+ .side-brand{padding:3px 4px 20px}.side-brand div:last-child,.side-nav span,.nav-label,.side-footer{display:none}
+ .side-logo{width:68px;height:68px}
+ .admin-main{margin-left:76px;width:calc(100% - 76px);padding:16px}
+ .admin-head{align-items:flex-start;flex-direction:column}
+ .kpis,.g4,.g3,.form{grid-template-columns:1fr}
+ .full{grid-column:auto}
+ .hero h2{font-size:31px}
+ .client-top{padding:10px 0;align-items:flex-start;flex-direction:column}
+}
+
+/* ===== CLIENTE V12: estilo claro premium basado en la referencia suministrada ===== */
+.client-light{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 85% 0%, rgba(214,179,74,.18), transparent 30%),
+    linear-gradient(180deg,#f7f6f2 0%,#eeeeea 100%);
+  color:#101010;
+}
+.client-light .client-wrap{max-width:1180px;margin:auto;padding:0 22px}
+.client-light .client-top{
+  min-height:86px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  border-bottom:1px solid #ddd6c3;
+}
+.client-light .brand h1{color:#111}
+.client-light .brand small{color:#606060}
+.client-light .brand-logo{
+  width:86px!important;
+  height:86px!important;
+  border:0!important;
+  background:#fff!important;
+  box-shadow:none!important;
+  border-radius:50%;
+  overflow:hidden;
+}
+.client-light .brand-logo img{
+  width:100%;height:100%;
+  object-fit:cover;
+  border-radius:50%;
+}
+.client-light .hero{
+  padding:70px 0 34px;
+  text-align:center;
+}
+.client-light .hero-logo{
+  width:190px;height:190px;
+  margin:0 auto 22px;
+  border-radius:50%;
+  overflow:hidden;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.client-light .hero-logo img{
+  width:100%;height:100%;
+  object-fit:cover;
+}
+.client-light .hero h2{
+  color:#111;
+  font-size:48px;
+  margin:0 0 12px;
+  letter-spacing:-.8px;
+}
+.client-light .hero h2 strong{color:#111}
+.client-light .hero p{
+  color:#666;
+  max-width:680px;
+  margin:0 auto 24px;
+  font-size:17px;
+}
+.client-light .btn.gold{
+  background:linear-gradient(180deg,#e7bc49,#c89218);
+  color:#111;
+  border:1px solid #b98412;
+  box-shadow:0 8px 20px rgba(178,128,12,.18);
+}
+.client-light .btn.gold:hover{filter:brightness(1.04)}
+.client-light .section{padding:34px 0}
+.client-light .section h3{
+  color:#111;
+  font-size:28px;
+}
+.client-light .sub{color:#6c6c6c}
+.client-light .card{
+  background:#fff;
+  border:1px solid #ded8c8;
+  box-shadow:0 10px 28px rgba(0,0,0,.06);
+  color:#111;
+}
+.client-light .meta{color:#777}
+.client-light .price{color:#b98012}
+.client-light .photo-card{
+  background:#f7f7f4;
+  border:1px solid #e4dfd2;
+}
+.client-light .avatar{
+  background:#fff;
+  border:2px solid #c99a24;
+}
+.client-light input,
+.client-light select,
+.client-light textarea{
+  background:#fff;
+  color:#111;
+  border:1px solid #cfcfcf;
+}
+.client-light input:focus,
+.client-light select:focus,
+.client-light textarea:focus{border-color:#c99a24}
+.client-light label{color:#424242}
+.client-light footer button{color:#999!important}
+.client-light .reserve-panel{
+  max-width:840px;
+  margin:0 auto;
+  background:#fff;
+  border:1px solid #d9d2bf;
+  border-radius:24px;
+  padding:28px;
+  box-shadow:0 18px 42px rgba(0,0,0,.08);
+}
+.client-light .reserve-panel h3{
+  text-align:center;
+  font-size:34px;
+  margin-bottom:4px;
+}
+.client-light .reserve-panel .sub{text-align:center;margin-bottom:24px}
+.client-light .section-label{
+  text-transform:uppercase;
+  letter-spacing:1.8px;
+  color:#b98012;
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:8px;
+}
+@media(max-width:760px){
+  .client-light .hero h2{font-size:36px}
+  .client-light .hero-logo{width:150px;height:150px}
+  .client-light .client-top{align-items:flex-start;flex-direction:column;padding:12px 0}
+  .client-light .brand-logo{width:72px!important;height:72px!important}
+}
+
+
+/* ===== V13 - apariencia basada en la imagen suministrada ===== */
+.v13-shell{min-height:100vh;background:#05090d;color:#fff}
+.v13-titlebar{height:58px;border-bottom:1px solid #152029;background:#071017;display:flex;align-items:center;padding:0 22px}
+.v13-titlebrand{display:flex;align-items:center;gap:12px;font-size:18px;letter-spacing:.4px}
+.v13-titlebrand img{width:34px;height:34px;border-radius:50%;object-fit:cover}
+.v13-main{display:grid;grid-template-columns:minmax(0,2fr) minmax(360px,.95fr);gap:20px;padding:18px 24px 0;max-width:1600px;margin:auto}
+.v13-left{min-height:600px;display:grid;grid-template-columns:minmax(370px,.85fr) minmax(410px,1.15fr);align-items:center;gap:15px}
+.v13-copy{padding:10px 0 10px 18px}
+.v13-big{font-weight:900;line-height:.9;letter-spacing:-3px;font-size:74px}
+.v13-big.white{color:#fff}
+.v13-big.goldtxt{color:#d69a27}
+.v13-big.smallline{font-size:55px;letter-spacing:-2px}
+.v13-benefits{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:34px 0 20px;max-width:450px}
+.v13-benefit{border:1px solid #86681d;border-radius:10px;min-height:160px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-size:22px;line-height:1.2;background:linear-gradient(180deg,#0b1116,#080d11)}
+.v13-ico{color:#e0a62e;font-size:48px;margin-bottom:8px}
+.v13-desc{font-size:21px;line-height:1.45;margin:18px 0}
+.v13-motto{color:#c89a3a;letter-spacing:4px;font-size:12px}
+.v13-centerlogo{text-align:center;align-self:stretch;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.v13-centerlogo img{width:min(520px,92%);aspect-ratio:1/1;object-fit:cover;border-radius:50%;filter:drop-shadow(0 0 20px rgba(221,166,48,.14))}
+.v13-management{color:#b99545;letter-spacing:7px;font-size:12px;margin-top:8px}
+.v13-booking{background:#f8f8f6;color:#111;border-radius:20px;min-height:610px;padding:30px 34px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start}
+.v13-booking-logo{width:150px;height:150px;border-radius:50%;overflow:hidden;margin-top:4px}
+.v13-booking-logo img{width:100%;height:100%;object-fit:cover}
+.v13-booking-name{font-size:48px;font-weight:900;line-height:1;margin-top:4px}
+.v13-booking-sub{letter-spacing:8px;font-size:13px;margin-top:4px}
+.v13-booking-start{width:100%;margin-top:58px;text-align:center}
+.v13-booking-start h2{font-size:36px;margin:0 0 28px}
+.v13-reserve{width:100%;border:0;border-radius:10px;padding:17px 20px;background:linear-gradient(180deg,#e9b547,#bd7e10);color:#fff;font-size:24px;cursor:pointer;font-weight:700;box-shadow:0 6px 20px rgba(163,112,16,.2)}
+.v13-reserve span{float:right}
+.v13-reserve.compact{max-width:320px;font-size:18px}
+.v13-reserve.form-submit{font-size:17px;padding:12px}
+.v13-back{width:100%;margin-top:9px;background:none;border:0;color:#666;cursor:pointer}
+.hidden{display:none!important}
+.v13-booking-form{width:100%;margin-top:20px}
+.v13-booking-form h3{text-align:center;font-size:26px;margin:0 0 12px}
+.v13-field{display:flex;flex-direction:column;gap:5px;margin-bottom:9px}
+.v13-field label{font-size:11px;color:#555}
+.v13-field input,.v13-field select,.v13-field textarea{background:#fff;color:#111;border:1px solid #cfcfcf;border-radius:8px;padding:9px}
+.v13-row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.v13-bottom{display:grid;grid-template-columns:320px 1fr 1fr;max-width:1600px;margin:12px auto 0;border:1px solid #152029;border-radius:10px 10px 0 0;overflow:hidden;background:#071017}
+.v13-bottomnav{padding:12px 18px;border-right:1px solid #152029;display:flex;flex-direction:column;gap:6px}
+.v13-bottomnav button{border:0;background:transparent;color:#fff;text-align:left;padding:12px 15px;border-radius:8px;font-size:16px;cursor:pointer}
+.v13-bottomnav button.active{background:#11171c;border-left:4px solid #e1ab32}
+.v13-bottomnav span{margin-left:10px}
+.v13-bottombrand{text-align:center;border-right:1px solid #152029;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px}
+.v13-bottombrand img{width:92px;height:92px;border-radius:50%;object-fit:cover}
+.v13-bottombrand div{color:#e2ac30;font-weight:900;font-size:29px}
+.v13-bottombrand small{letter-spacing:7px;color:#b4a17b}
+.v13-search{display:flex;align-items:center;gap:12px;padding:20px}
+.v13-search span{font-size:36px}
+.v13-search input{width:100%;background:#071017;color:#fff;border:1px solid #202a31;border-radius:10px;padding:15px 18px;font-size:15px}
+.v13-detail{max-width:1600px;margin:0 auto;background:#05090d;border-left:1px solid #152029;border-right:1px solid #152029;padding:22px}
+.v13-panel{display:none}
+.v13-panel.active{display:block}
+.v13-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.v13-stat{border:1px solid #2b2a20;border-radius:12px;padding:20px;background:#0a1014}
+.v13-stat span{color:#aaa;text-transform:uppercase;font-size:11px}
+.v13-stat strong{display:block;color:#e2ae37;font-size:36px;margin-top:5px}
+.v13-stat small{color:#777}
+.v13-servicegrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.v13-servicecard{background:#0b1115;border:1px solid #2b2a20;border-radius:12px;padding:12px}
+.v13-serviceimg{height:130px;background:#05090d;border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.v13-serviceimg img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+.v13-serviceimg span{color:#e2ae37;font-size:42px}
+.v13-servicename{font-weight:700;margin-top:10px}
+.v13-serviceprice{color:#e2ae37;font-size:20px;font-weight:900;margin-top:4px}
+.v13-servicetime{color:#888;font-size:12px;margin-top:2px}
+.v13-client-extra{max-width:1600px;margin:auto;padding:26px 22px}
+.v13-client-extra section{margin-bottom:30px}
+.v13-client-extra h3{font-size:24px;color:#e2ae37}
+.v13-barberphoto{width:100px;height:100px;border-radius:50%;margin:auto;overflow:hidden;background:#05090d;display:flex;align-items:center;justify-content:center;color:#e2ae37;font-size:32px}
+.v13-barberphoto img{width:100%;height:100%;object-fit:cover}
+.v13-empty{color:#777}
+.v13-footer{text-align:center;padding:25px}
+.v13-footer button{border:0;background:none;color:#444;font-size:10px;cursor:pointer}
+@media(max-width:1200px){
+ .v13-main{grid-template-columns:1fr}
+ .v13-booking{min-height:auto}
+ .v13-left{grid-template-columns:1fr 1fr}
+ .v13-bottom{grid-template-columns:250px 1fr}
+ .v13-search{grid-column:1/-1;border-top:1px solid #152029}
+ .v13-servicegrid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:800px){
+ .v13-left{grid-template-columns:1fr}
+ .v13-centerlogo img{width:320px}
+ .v13-big{font-size:56px}
+ .v13-big.smallline{font-size:42px}
+ .v13-bottom{grid-template-columns:1fr}
+ .v13-bottomnav{border-right:0}
+ .v13-bottombrand{border-right:0;border-top:1px solid #152029}
+ .v13-servicegrid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:520px){
+ .v13-servicegrid{grid-template-columns:1fr}
+ .v13-benefits{grid-template-columns:1fr}
+ .v13-row2{grid-template-columns:1fr}
+ .v13-big{font-size:46px}
+ .v13-big.smallline{font-size:34px}
+}
+
+.v13-cancel-link{width:100%;border:0;background:none;color:#9c1f1f;font-size:10px;font-weight:800;cursor:pointer;margin-top:5px;padding:5px}
+.v13-cancel-box{margin-top:5px;padding-top:7px;border-top:1px solid #ddd}
+.v13-cancel-submit{width:100%;border:1px solid #a73636;background:#fff5f5;color:#9c1f1f;border-radius:6px;padding:8px;font-weight:800;cursor:pointer;margin-top:5px}
 
 </style>
 </head>
 <body>
 
 {% with messages=get_flashed_messages(with_categories=true) %}
-{% if messages %}<div class="flash-wrap">{% for cat,msg in messages %}<div class="flash">{{msg}}</div>{% endfor %}</div>{% endif %}
+{% for cat,msg in messages %}<div class="flash">{{msg}}</div>{% endfor %}
 {% endwith %}
 
-{% if admin_mode %}
-<div class="app">
-<aside class="sidebar">
-  <div class="brand">
-    <img class="brand-logo-img" src="/static/goldens-logo.png" alt="Goldens Barbershop">
-  </div>
-  <div class="nav-title">OPERACIÓN</div>
-  <nav class="nav">
-    <a href="#inicio" class="active"><span class="ico">🏠</span><span>Inicio</span></a>
-    <a href="#agenda"><span class="ico">🗓️</span><span>Agenda</span></a>
-    <a href="#barberos"><span class="ico">♟️</span><span>Barberos</span></a>
-    <a href="#servicios"><span class="ico">✂</span><span>Servicios</span></a>
-    <a href="#productos"><span class="ico">📦</span><span>Productos</span></a>
-    <a href="#alertas"><span class="ico">🔔</span><span>Alertas</span></a>
-  </nav>
-  <div class="side-foot">MÁS QUE UN CORTE,<br>ES TU ESTILO</div>
-</aside>
+{% if not admin_mode %}
 
-<main class="main">
-<section id="inicio" class="section-anchor">
-  <div class="top">
-    <div><h2><span>Goldens</span> Agenda</h2><p>Control de citas, servicios y productos.</p></div>
-    <div class="top-actions">
-      <a class="bell" href="#alertas" title="Alertas">🔔</a>
-      <a class="btn btn-dark" href="/admin/logout">Modo cliente</a>
-      <button class="btn btn-gold" onclick="bookingDlg.showModal()">+ Agendar cita</button>
+<div class="v13-shell">
+  <div class="v13-titlebar">
+    <div class="v13-titlebrand">
+      <img src="/static/assets/goldens_g_logo.jpg" alt="Goldens">
+      <span>GOLDENS - SISTEMA DE GESTIÓN</span>
     </div>
   </div>
 
-  <div class="cards">
-    <div class="stat-card"><div class="stat-ico">🗓️</div><div><small>Citas de hoy</small><strong>{{today_count}}</strong><em>Programadas para hoy</em></div></div>
-    <div class="stat-card"><div class="stat-ico">✂</div><div><small>Servicios activos</small><strong>{{services|length}}</strong><em>Disponibles para reservas</em></div></div>
-    <div class="stat-card"><div class="stat-ico">📦</div><div><small>Productos</small><strong>{{products|length}}</strong><em>Con stock visible</em></div></div>
-  </div>
+  <div class="v13-main">
+    <section class="v13-left">
+      <div class="v13-copy">
+        <div class="v13-big white">GOLDENS</div>
+        <div class="v13-big goldtxt">AGENDA</div>
+        <div class="v13-big goldtxt smallline">BARBERSHOP</div>
 
-  <div class="panel">
-    <div class="panel-head"><div><h3>Agenda de hoy</h3><p>Citas programadas para el día de hoy.</p></div><a class="btn btn-dark" href="#agenda">Ver agenda ›</a></div>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Hora</th><th>Cliente</th><th>Servicio</th><th>Barbero</th><th>Estado</th></tr></thead>
-        <tbody>
-        {% set ns = namespace(found=false) %}
-        {% for a in appointments %}
-          {% if a.appointment_date.isoformat() == today %}
-          {% set ns.found = true %}
-          <tr>
-            <td><strong>{{a.appointment_time.strftime("%H:%M")}}</strong></td>
-            <td>{{a.client.name|upper}}</td>
-            <td>{{a.service.name}}</td>
-            <td>{{a.barber.name|upper}}</td>
-            <td><span class="badge gold">{{a.status}}</span></td>
-          </tr>
-          {% endif %}
-        {% endfor %}
-        {% if not ns.found %}<tr><td colspan="5" style="color:#777;text-align:center;padding:18px">No hay citas para hoy.</td></tr>{% endif %}
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-<section id="agenda" class="panel section-anchor">
-  <div class="panel-head"><div><h3>Agenda completa</h3><p>Clientes, servicio, barbero, forma de pago y estado.</p></div><button class="btn btn-gold" onclick="bookingDlg.showModal()">+ Nueva cita</button></div>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>Fecha</th><th>Hora</th><th>Cliente</th><th>WhatsApp</th><th>Servicio</th><th>Barbero</th><th>Precio</th><th>Pago</th><th>Estado</th><th>Acciones</th></tr></thead>
-      <tbody>
-      {% for a in appointments %}
-      <tr>
-        <td>{{a.appointment_date.strftime("%d/%m/%Y")}}</td>
-        <td><strong>{{a.appointment_time.strftime("%H:%M")}}</strong></td>
-        <td>{{a.client.name|upper}}</td>
-        <td>{{a.client.phone}}</td>
-        <td>{{a.service.name}}</td>
-        <td>{{a.barber.name|upper}}</td>
-        <td>{{a.price|money}}</td>
-        <td><span class="badge">{{a.payment_method or "No indicado"}}</span></td>
-        <td><span class="badge">{{a.status}}</span></td>
-        <td class="actions">
-          <a class="btn btn-green" href="/admin/appointment/{{a.id}}/whatsapp" target="_blank">WhatsApp</a>
-          <form method="post" action="/admin/appointment/{{a.id}}/status" style="display:flex;gap:5px">
-            <select name="status">
-              <option {% if a.status=="Confirmada" %}selected{% endif %}>Confirmada</option>
-              <option {% if a.status=="Pendiente" %}selected{% endif %}>Pendiente</option>
-              <option {% if a.status=="Atendida" %}selected{% endif %}>Atendida</option>
-              <option {% if a.status=="Cancelada" %}selected{% endif %}>Cancelada</option>
-              <option {% if a.status=="No llegó" %}selected{% endif %}>No llegó</option>
-            </select>
-            <button class="btn btn-dark">OK</button>
-          </form>
-          <form method="post" action="/admin/appointment/{{a.id}}/delete" onsubmit="return confirm('¿Seguro que deseas eliminar esta cita?');">
-            <button class="btn btn-danger" type="submit">Eliminar</button>
-          </form>
-        </td>
-      </tr>
-      {% endfor %}
-      {% if not appointments %}<tr><td colspan="10" style="text-align:center;color:#777;padding:18px">No hay citas registradas.</td></tr>{% endif %}
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<section id="barberos" class="panel section-anchor">
-  <div class="panel-head"><div><h3>Barberos</h3><p>Administrá equipo, especialidad, fotos y estado.</p></div></div>
-  <div class="manage-grid">
-    <div class="manage-card">
-      <h4>+ Nuevo barbero</h4>
-      <form method="post" action="/admin/barber" enctype="multipart/form-data">
-        <div class="field"><label>Nombre</label><input name="name" required></div>
-        <div class="field"><label>Especialidad</label><input name="specialty"></div>
-        <div class="field"><label>Foto</label><input type="file" name="photo" accept="image/*"></div>
-        <button class="btn btn-gold">Agregar</button>
-      </form>
-    </div>
-    {% for b in admin_barbers %}
-    <div class="manage-card">
-      <div class="thumb">{% if barber_photos.get(b.id) %}<img src="{{barber_photos.get(b.id)}}">{% elif b.photo_url %}<img src="{{b.photo_url}}">{% else %}{{b.name[0]|upper}}{% endif %}</div>
-      <h4>{{b.name}}</h4>
-      <form method="post" action="/admin/barber/{{b.id}}/update" enctype="multipart/form-data">
-        <div class="field"><label>Nombre</label><input name="name" value="{{b.name}}" required></div>
-        <div class="field"><label>Especialidad</label><input name="specialty" value="{{b.specialty or ''}}"></div>
-        <div class="field"><label>Estado</label><select name="active"><option value="true" {% if b.active %}selected{% endif %}>Activo</option><option value="false" {% if not b.active %}selected{% endif %}>Oculto</option></select></div>
-        <div class="field"><label>Cambiar foto</label><input type="file" name="photo" accept="image/*"></div>
-        <button class="btn btn-dark">Guardar</button>
-      </form>
-      <form method="post" action="/admin/barber/{{b.id}}/remove" style="margin-top:6px"><button class="btn btn-danger" style="width:100%">Quitar</button></form>
-    </div>
-    {% endfor %}
-  </div>
-</section>
-
-<section id="servicios" class="panel section-anchor">
-  <div class="panel-head"><div><h3>Servicios</h3><p>Precios, duración, imágenes y disponibilidad.</p></div></div>
-  <div class="manage-grid">
-    <div class="manage-card">
-      <h4>+ Nuevo servicio</h4>
-      <form method="post" action="/admin/service" enctype="multipart/form-data">
-        <div class="field"><label>Nombre</label><input name="name" required></div>
-        <div class="manage-row"><div class="field"><label>Precio ₡</label><input name="price" type="number" required></div><div class="field"><label>Duración</label><input name="duration" type="number" value="30"></div></div>
-        <div class="field"><label>Foto</label><input type="file" name="photo" accept="image/*"></div>
-        <button class="btn btn-gold">Agregar</button>
-      </form>
-    </div>
-    {% for s in admin_services %}
-    <div class="manage-card">
-      <div class="thumb">{% if service_photos.get(s.id) %}<img src="{{service_photos.get(s.id)}}">{% else %}✂{% endif %}</div>
-      <h4>{{s.name}}</h4>
-      <form method="post" action="/admin/service/{{s.id}}/update" enctype="multipart/form-data">
-        <div class="field"><label>Nombre</label><input name="name" value="{{s.name}}" required></div>
-        <div class="manage-row"><div class="field"><label>Precio ₡</label><input name="price" type="number" value="{{s.price}}" required></div><div class="field"><label>Duración</label><input name="duration" type="number" value="{{s.duration}}" required></div></div>
-        <div class="field"><label>Estado</label><select name="active"><option value="true" {% if s.active %}selected{% endif %}>Activo</option><option value="false" {% if not s.active %}selected{% endif %}>Oculto</option></select></div>
-        <div class="field"><label>Cambiar foto</label><input type="file" name="photo" accept="image/*"></div>
-        <button class="btn btn-dark">Guardar</button>
-      </form>
-      <form method="post" action="/admin/service/{{s.id}}/remove" style="margin-top:6px"><button class="btn btn-danger" style="width:100%">Quitar</button></form>
-    </div>
-    {% endfor %}
-  </div>
-</section>
-
-<section id="productos" class="panel section-anchor">
-  <div class="panel-head"><div><h3>Productos</h3><p>Inventario, precio, imagen y visibilidad para el cliente.</p></div></div>
-  <div class="manage-grid">
-    <div class="manage-card">
-      <h4>+ Nuevo producto</h4>
-      <form method="post" action="/admin/product" enctype="multipart/form-data">
-        <div class="field"><label>Nombre</label><input name="name" required></div>
-        <div class="manage-row"><div class="field"><label>Precio ₡</label><input name="price" type="number" required></div><div class="field"><label>Stock</label><input name="stock" type="number" value="1"></div></div>
-        <div class="field"><label>Foto</label><input type="file" name="photo" accept="image/*"></div>
-        <button class="btn btn-gold">Agregar</button>
-      </form>
-    </div>
-    {% for p in admin_products %}
-    <div class="manage-card">
-      <div class="thumb">{% if product_photos.get(p.id) %}<img src="{{product_photos.get(p.id)}}">{% else %}📦{% endif %}</div>
-      <h4>{{p.name}}</h4>
-      <form method="post" action="/admin/product/{{p.id}}/update" enctype="multipart/form-data">
-        <div class="field"><label>Nombre</label><input name="name" value="{{p.name}}" required></div>
-        <div class="manage-row"><div class="field"><label>Precio ₡</label><input name="price" type="number" value="{{p.price}}" required></div><div class="field"><label>Stock</label><input name="stock" type="number" value="{{p.stock}}" required></div></div>
-        <div class="field"><label>Estado</label><select name="active"><option value="true" {% if p.active %}selected{% endif %}>Activo</option><option value="false" {% if not p.active %}selected{% endif %}>Oculto</option></select></div>
-        <div class="field"><label>Cambiar foto</label><input type="file" name="photo" accept="image/*"></div>
-        <button class="btn btn-dark">Guardar</button>
-      </form>
-      <form method="post" action="/admin/product/{{p.id}}/remove" style="margin-top:6px"><button class="btn btn-danger" style="width:100%">Quitar</button></form>
-    </div>
-    {% endfor %}
-  </div>
-</section>
-
-<section id="alertas" class="panel section-anchor">
-  <div class="panel-head"><div><h3>Alertas</h3><p>Próximas citas y espacios a revisar.</p></div></div>
-  <div class="mini-grid">
-    {% for a in appointments[:6] %}
-    <div class="mini-card"><h5>{{a.client.name}}</h5><div class="muted">{{a.appointment_date.strftime("%d/%m/%Y")}} · {{a.appointment_time.strftime("%H:%M")}}</div><div>{{a.service.name}} · {{a.barber.name}}</div><div style="margin-top:8px"><span class="badge">{{a.status}}</span></div></div>
-    {% endfor %}
-    {% if not appointments %}<div class="mini-card">No hay alertas de citas pendientes.</div>{% endif %}
-  </div>
-</section>
-</main>
-</div>
-
-<dialog id="bookingDlg">
-  <div class="modal-head"><strong>+ Agendar cita</strong><button class="x" onclick="bookingDlg.close()">×</button></div>
-  <div class="modal-body">
-    <form method="post" action="/reservar" class="booking" style="margin:0">
-      <div class="form-grid">
-        <div class="field"><label>Nombre</label><input name="name" required></div>
-        <div class="field"><label>WhatsApp</label><input name="phone" required placeholder="8888-8888"></div>
-        <div class="field"><label>Servicio</label><select name="service_id" required>{% for s in services %}<option value="{{s.id}}">{{s.name}} — {{s.price|money}}</option>{% endfor %}</select></div>
-        <div class="field"><label>Barbero</label><select name="barber_id" id="adminBarber" required>{% for b in barbers %}<option value="{{b.id}}">{{b.name}}</option>{% endfor %}</select></div>
-        <div class="field"><label>Fecha</label><input type="date" name="appointment_date" id="adminDate" min="{{today}}" value="{{today}}" required></div>
-        <div class="field"><label>Hora disponible</label><select name="appointment_time" id="adminTime" required><option value="">Cargando...</option></select></div>
-        <div class="field"><label>Forma de pago</label><select name="payment_method" required><option value="">Seleccioná</option><option value="Efectivo">Efectivo</option><option value="SINPE Móvil">SINPE Móvil</option></select></div>
-        <div class="field full"><label>Notas</label><textarea name="notes" rows="3"></textarea></div>
-        <div class="field full"><button class="btn btn-gold" type="submit">Guardar cita</button></div>
-      </div>
-    </form>
-  </div>
-</dialog>
-
-<script>
-async function adminLoadSlots(){
-  const date=document.getElementById('adminDate')?.value, barber=document.getElementById('adminBarber')?.value, time=document.getElementById('adminTime');
-  if(!date||!barber||!time) return;
-  time.innerHTML='<option value="">Cargando...</option>';
-  try{
-    const r=await fetch('/api/slots?date='+encodeURIComponent(date)+'&barber_id='+encodeURIComponent(barber),{cache:'no-store'});
-    const j=await r.json();
-    time.innerHTML=j.slots.length?j.slots.map(x=>'<option value="'+x+'">'+x+'</option>').join(''):'<option value="">Sin espacios disponibles</option>';
-  }catch(e){time.innerHTML='<option value="">Error cargando horarios</option>'}
-}
-document.getElementById('adminDate')?.addEventListener('change',adminLoadSlots);
-document.getElementById('adminBarber')?.addEventListener('change',adminLoadSlots);
-document.querySelectorAll('.nav a').forEach(a=>a.addEventListener('click',()=>{document.querySelectorAll('.nav a').forEach(x=>x.classList.remove('active'));a.classList.add('active')}));
-adminLoadSlots();
-if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js").catch(()=>{}));}
-</script>
-
-{% else %}
-<div class="client-booking-shell">
-  <section class="client-visual">
-    <div class="client-copy">
-      <h1>GOLDENS<span class="goldline">AGENDA</span><span class="smallline">BARBERSHOP</span></h1>
-      <div class="client-benefits">
-        <div class="benefit"><b>♛</b><span>ESTILO<br>PREMIUM</span></div>
-        <div class="benefit"><b>★</b><span>ATENCIÓN<br>PERSONALIZADA</span></div>
-      </div>
-      <div class="desc">Organizá tu cita, elegí tu servicio y disfrutá la experiencia Goldens.</div>
-      <div class="motto">DISCIPLINA · ESTILO · RESULTADOS</div>
-    </div>
-    <div class="big-g-wrap">
-      <img class="big-g" src="/static/goldens-512.png" alt="Goldens">
-      <div class="big-g-caption">BARBERSHOP MANAGEMENT</div>
-    </div>
-  </section>
-
-  <section class="client-form-zone">
-    <div class="client-form-card">
-      <div class="client-form-logo">
-        <img src="/static/goldens-512.png" alt="Goldens">
-        <h2>GOLDENS</h2>
-        <small>BARBERSHOP</small>
-      </div>
-      <h3>AGENDA TU CITA</h3>
-
-      <form method="post" action="/reservar" class="booking-fields">
-        <div class="field span2"><label>Nombre</label><input name="name" required></div>
-        <div class="field span2"><label>WhatsApp</label><input name="phone" required placeholder="8888-8888"></div>
-        <div class="field span2"><label>Servicio</label><select name="service_id" required>{% for s in services %}<option value="{{s.id}}">{{s.name}} — {{s.price|money}}</option>{% endfor %}</select></div>
-        <div class="field span2"><label>Barbero</label><select name="barber_id" id="barber" required>{% for b in barbers %}<option value="{{b.id}}">{{b.name}}</option>{% endfor %}</select></div>
-        <div class="field"><label>Fecha</label><input type="date" name="appointment_date" id="date" min="{{today}}" value="{{today}}" required></div>
-        <div class="field"><label>Hora</label><select name="appointment_time" id="time" required><option value="">Cargando...</option></select></div>
-
-        <div class="field span2">
-          <label>Forma de pago</label>
-          <div class="pay-options">
-            <div class="pay-radio"><input type="radio" name="payment_method" id="payCash" value="Efectivo" required><label for="payCash">💵 EFECTIVO</label></div>
-            <div class="pay-radio"><input type="radio" name="payment_method" id="paySinpe" value="SINPE Móvil" required><label for="paySinpe">📱 SINPE MÓVIL</label></div>
+        <div class="v13-benefits">
+          <div class="v13-benefit">
+            <div class="v13-ico">♛</div>
+            <div>ESTILO<br>PREMIUM</div>
+          </div>
+          <div class="v13-benefit">
+            <div class="v13-ico">★</div>
+            <div>ATENCIÓN<br>PERSONALIZADA</div>
           </div>
         </div>
 
-        <div class="field span2"><label>Comentario opcional</label><textarea name="notes" rows="2"></textarea></div>
-        <div class="field span2"><button class="confirm-client" type="submit">Confirmar reserva</button></div>
-      </form>
+        <p class="v13-desc">Organiza tus citas, controla tus servicios<br>y haz crecer tu barbershop.</p>
+        <div class="v13-motto">DISCIPLINA &nbsp;·&nbsp; ESTILO &nbsp;·&nbsp; RESULTADOS</div>
+      </div>
 
-      <details class="cancel-box">
-        <summary>¿Agendaste por error? CANCELAR CITA</summary>
-        <form method="post" action="/cancelar-mi-cita" class="cancel-form" onsubmit="return confirm('¿Seguro que deseas cancelar esta cita?');">
-          <div class="field span2"><label>WhatsApp usado en la reserva</label><input name="phone" required placeholder="8888-8888"></div>
-          <div class="field"><label>Fecha de la cita</label><input type="date" name="appointment_date" required></div>
-          <div class="field"><label>Hora de la cita</label><input type="time" name="appointment_time" required></div>
-          <div class="field span2"><button class="cancel-submit" type="submit">Cancelar mi cita</button></div>
+      <div class="v13-centerlogo">
+        <img src="/static/assets/goldens_g_logo.jpg" alt="Goldens G">
+        <div class="v13-management">BARBERSHOP MANAGEMENT</div>
+      </div>
+    </section>
+
+    <aside class="v13-booking">
+      <div class="v13-booking-logo">
+        <img src="/static/assets/goldens_g_logo.jpg" alt="Goldens">
+      </div>
+      <div class="v13-booking-name">GOLDENS</div>
+      <div class="v13-booking-sub">BARBERSHOP</div>
+
+      <div id="bookingStart" class="v13-booking-start">
+        <h2>AGENDA TU CITA</h2>
+        <button class="v13-reserve" type="button" onclick="showBooking()">Reservar ahora <span>→</span></button>
+      </div>
+
+      <div id="bookingFormWrap" class="v13-booking-form hidden">
+        <h3>AGENDA TU CITA</h3>
+        <form method="post" action="/reservar">
+          <div class="v13-field"><label>Nombre</label><input name="name" required></div>
+          <div class="v13-field"><label>WhatsApp</label><input name="phone" required placeholder="8888-8888"></div>
+
+          <div class="v13-field"><label>Servicio</label>
+            <select name="service_id" required>
+              {% for s in services %}
+              <option value="{{s.id}}">{{s.name}} — {{s.price|money}}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="v13-field"><label>Barbero</label>
+            <select name="barber_id" id="barber" required>
+              {% for b in barbers %}
+              <option value="{{b.id}}">{{b.name}}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="v13-row2">
+            <div class="v13-field"><label>Fecha</label><input type="date" name="appointment_date" id="date" min="{{today}}" value="{{today}}" required></div>
+            <div class="v13-field"><label>Hora</label><select name="appointment_time" id="time" required><option>Cargando...</option></select></div>
+          </div>
+
+          <div class="v13-field"><label>Forma de pago</label>
+            <select name="payment_method" required>
+              <option value="">Seleccioná una opción</option>
+              <option value="Efectivo">Efectivo</option>
+              <option value="SINPE Móvil">SINPE Móvil</option>
+            </select>
+          </div>
+
+          <div class="v13-field"><label>Comentario opcional</label><textarea name="notes" rows="2"></textarea></div>
+          <button class="v13-reserve form-submit" type="submit">Confirmar reserva</button>
+          <button class="v13-back" type="button" onclick="hideBooking()">← Volver</button>
         </form>
-      </details>
+        <button class="v13-cancel-link" type="button" onclick="toggleClientCancel()">¿Agendaste por error? Cancelar cita</button>
+        <div id="clientCancelBox" class="v13-cancel-box hidden">
+          <form method="post" action="/cancelar-mi-cita" onsubmit="return confirm('¿Seguro que deseas cancelar esta cita?');">
+            <div class="v13-field"><label>WhatsApp usado en la reserva</label><input name="phone" required placeholder="8888-8888"></div>
+            <div class="v13-row2">
+              <div class="v13-field"><label>Fecha</label><input type="date" name="appointment_date" required></div>
+              <div class="v13-field"><label>Hora</label><input type="time" name="appointment_time" required></div>
+            </div>
+            <button class="v13-cancel-submit" type="submit">Cancelar mi cita</button>
+          </form>
+        </div>
+      </div>
+    </aside>
+  </div>
 
-      <div class="client-back"><a href="/whatsapp" target="_blank">WhatsApp Goldens 6015-8371</a> · <a href="#admin-login" onclick="document.getElementById('adminBox').style.display='block';return false">Administrador</a></div>
+  <div class="v13-bottom">
+    <nav class="v13-bottomnav">
+      <button class="active" type="button" onclick="showBottom('resumen',this)">◔ <span>Resumen</span></button>
+      <button type="button" onclick="showBottom('agenda',this)">▣ <span>Agenda</span></button>
+      <button type="button" onclick="showBottom('servicios',this)">✂ <span>Servicios</span></button>
+    </nav>
 
-      <div id="adminBox" style="display:none;margin-top:10px;border-top:1px solid #ddd;padding-top:10px">
-        <form method="post" action="/admin/login">
-          <div class="field"><label>Usuario</label><input name="user" value="admin" required></div>
-          <div class="field" style="margin-top:6px"><label>PIN</label><input name="pin" type="password" required></div>
-          <button class="confirm-client" style="background:#222;margin-top:8px">Ingresar</button>
-        </form>
+    <div class="v13-bottombrand">
+      <img src="/static/assets/goldens_g_logo.jpg" alt="Goldens">
+      <div>GOLDENS</div>
+      <small>BARBERSHOP</small>
+    </div>
+
+    <div class="v13-search">
+      <span>⌕</span>
+      <input id="clientSearchBox" placeholder="Buscar servicio, barbero o producto..." oninput="filterClientCards()">
+    </div>
+  </div>
+
+  <div class="v13-detail">
+    <div id="panel-resumen" class="v13-panel active">
+      <div class="v13-stats">
+        <div class="v13-stat">
+          <span>Servicios</span>
+          <strong>{{services|length}}</strong>
+          <small>Disponibles</small>
+        </div>
+        <div class="v13-stat">
+          <span>Barberos</span>
+          <strong>{{barbers|length}}</strong>
+          <small>Activos</small>
+        </div>
+        <div class="v13-stat">
+          <span>Productos</span>
+          <strong>{{products|length}}</strong>
+          <small>Disponibles</small>
+        </div>
       </div>
     </div>
-  </section>
+
+    <div id="panel-agenda" class="v13-panel">
+      <h3>AGENDA TU CITA</h3>
+      <p>Seleccioná tu servicio, tu barbero, la fecha y la hora.</p>
+      <button class="v13-reserve compact" type="button" onclick="showBooking()">Reservar ahora →</button>
+    </div>
+
+    <div id="panel-servicios" class="v13-panel">
+      <div class="v13-servicegrid">
+        {% for s in services %}
+        <div class="v13-servicecard searchable-card" data-search="{{s.name|lower}}">
+          <div class="v13-serviceimg">
+            {% if service_photos.get(s.id) %}
+            <img src="{{service_photos.get(s.id)}}" alt="{{s.name}}">
+            {% else %}
+            <span>✂</span>
+            {% endif %}
+          </div>
+          <div class="v13-servicename">{{s.name}}</div>
+          <div class="v13-serviceprice">{{s.price|money}}</div>
+          <div class="v13-servicetime">{{s.duration}} min</div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="v13-client-extra">
+    <section>
+      <h3>BARBEROS</h3>
+      <div class="v13-servicegrid">
+        {% for b in barbers %}
+        <div class="v13-servicecard searchable-card" data-search="{{b.name|lower}} {{(b.specialty or '')|lower}}">
+          <div class="v13-barberphoto">
+            {% if barber_photos.get(b.id) %}
+            <img src="{{barber_photos.get(b.id)}}" alt="{{b.name}}">
+            {% elif b.photo_url %}
+            <img src="{{b.photo_url}}" alt="{{b.name}}">
+            {% else %}
+            <span>{{b.name[0]|upper}}</span>
+            {% endif %}
+          </div>
+          <div class="v13-servicename">{{b.name}}</div>
+          <div class="v13-servicetime">{{b.specialty or "Disponible para reservas"}}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section>
+      <h3>PRODUCTOS</h3>
+      <div class="v13-servicegrid">
+        {% if products %}
+          {% for p in products %}
+          <div class="v13-servicecard searchable-card" data-search="{{p.name|lower}}">
+            <div class="v13-serviceimg">
+              {% if product_photos.get(p.id) %}
+              <img src="{{product_photos.get(p.id)}}" alt="{{p.name}}">
+              {% else %}
+              <span>G</span>
+              {% endif %}
+            </div>
+            <div class="v13-servicename">{{p.name}}</div>
+            <div class="v13-serviceprice">{{p.price|money}}</div>
+          </div>
+          {% endfor %}
+        {% else %}
+          <div class="v13-empty">No hay productos activos.</div>
+        {% endif %}
+      </div>
+    </section>
+  </div>
+
+  <footer class="v13-footer">
+    <button type="button" onclick="adminDlg.showModal()">Acceso administrador</button>
+  </footer>
+
+  <dialog id="adminDlg">
+    <div class="modal-head"><strong>Acceso administrador</strong><button class="x" type="button" onclick="adminDlg.close()">×</button></div>
+    <div class="modal-body">
+      <form method="post" action="/admin/login">
+        <div class="field"><label>Usuario</label><input name="user" value="admin" required></div>
+        <div class="field" style="margin-top:10px"><label>PIN</label><input type="password" name="pin" required></div>
+        <button class="btn gold" style="width:100%;margin-top:14px">Entrar</button>
+      </form>
+    </div>
+  </dialog>
 </div>
 
 <script>
+function showBooking(){
+  const start=document.getElementById('bookingStart');
+  const wrap=document.getElementById('bookingFormWrap');
+  if(start)start.classList.add('hidden');
+  if(wrap)wrap.classList.remove('hidden');
+  loadSlots();
+}
+function hideBooking(){
+  const start=document.getElementById('bookingStart');
+  const wrap=document.getElementById('bookingFormWrap');
+  if(wrap)wrap.classList.add('hidden');
+  if(start)start.classList.remove('hidden');
+}
 async function loadSlots(){
-  const date=document.getElementById('date')?.value, barber=document.getElementById('barber')?.value, time=document.getElementById('time');
-  if(!date||!barber||!time)return;
-  time.innerHTML='<option value="">Cargando...</option>';
+  const d=document.getElementById('date')?.value;
+  const b=document.getElementById('barber')?.value;
+  const t=document.getElementById('time');
+  if(!d||!b||!t)return;
+  t.innerHTML='<option>Cargando...</option>';
   try{
-    const r=await fetch('/api/slots?date='+encodeURIComponent(date)+'&barber_id='+encodeURIComponent(barber),{cache:'no-store'});
-    const j=await r.json();
-    time.innerHTML=j.slots.length?j.slots.map(x=>'<option value="'+x+'">'+x+'</option>').join(''):'<option value="">Sin espacios disponibles</option>';
-  }catch(e){time.innerHTML='<option value="">Error cargando horarios</option>'}
+    const r=await fetch(`/api/slots?date=${encodeURIComponent(d)}&barber_id=${encodeURIComponent(b)}`);
+    const data=await r.json();
+    if(!data.slots || !data.slots.length){
+      t.innerHTML='<option value="">Sin espacios disponibles</option>';
+      return;
+    }
+    t.innerHTML=data.slots.map(x=>`<option value="${x}">${x}</option>`).join('');
+  }catch(e){
+    t.innerHTML='<option value="">Error cargando horarios</option>';
+  }
 }
 document.getElementById('date')?.addEventListener('change',loadSlots);
 document.getElementById('barber')?.addEventListener('change',loadSlots);
-loadSlots();
-if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js").catch(()=>{}));}
+
+function showBottom(name,btn){
+  document.querySelectorAll('.v13-panel').forEach(p=>p.classList.remove('active'));
+  const panel=document.getElementById('panel-'+name);
+  if(panel)panel.classList.add('active');
+  document.querySelectorAll('.v13-bottomnav button').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  document.querySelector('.v13-detail')?.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function filterClientCards(){
+  const box=document.getElementById('clientSearchBox');
+  const q=(box?.value||'').toLowerCase().trim();
+  document.querySelectorAll('.searchable-card').forEach(card=>{
+    card.style.display=(!q || (card.dataset.search||'').includes(q))?'block':'none';
+  });
+  if(q){
+    const serviceBtn=document.querySelectorAll('.v13-bottomnav button')[2];
+    showBottom('servicios',serviceBtn);
+  }
+}
 </script>
+
+{% else %}
+
+<div class="admin-page">
+<aside class="sidebar">
+ <div class="side-brand">
+   <div class="side-logo"><img src="/static/assets/goldens_g_logo.jpg" alt="Goldens"></div>
+   <div><h2>GOLDENS</h2><small>BARBERSHOP</small></div>
+ </div>
+
+ <div class="side-nav">
+  <div class="nav-label">Operación</div>
+  <a class="active" href="#inicio"><span>🏠</span><span>Inicio</span></a>
+  <a href="#agenda"><span>📅</span><span>Agenda</span></a>
+  <a href="#barberos"><span>💈</span><span>Barberos</span></a>
+  <a href="#servicios"><span>✂</span><span>Servicios</span></a>
+  <a href="#productos"><span>📦</span><span>Productos</span></a>
+  <a href="#alertas"><span>🔔</span><span>Alertas</span></a>
+ </div>
+
+ <div class="side-footer">MÁS QUE UN CORTE,<br>ES TU ESTILO</div>
+</aside>
+
+<main class="admin-main">
+ <section id="inicio" class="admin-section">
+  <div class="admin-head">
+   <div class="admin-title">
+    <h1><span>Goldens</span> Agenda</h1>
+    <p>Control de citas, servicios y productos.</p>
+   </div>
+   <div class="head-actions">
+    <div class="bell">🔔</div>
+    <a class="btn dark" href="/admin/logout">Modo cliente</a>
+    <a class="btn gold" href="#agenda">+ Agendar cita</a>
+   </div>
+  </div>
+
+  <div class="kpis">
+   <div class="kpi">
+    <div class="kpi-icon">📅</div>
+    <div><small>Citas de hoy</small><strong>{{today_count}}</strong><p>Programadas para hoy</p></div>
+   </div>
+   <div class="kpi">
+    <div class="kpi-icon">✂</div>
+    <div><small>Servicios activos</small><strong>{{services|length}}</strong><p>Disponibles para reservas</p></div>
+   </div>
+   <div class="kpi">
+    <div class="kpi-icon">📦</div>
+    <div><small>Productos</small><strong>{{products|length}}</strong><p>Con stock visible</p></div>
+   </div>
+  </div>
+
+  <div class="admin-card">
+   <div class="section-title">
+    <div><h3>Agenda de hoy</h3><div class="meta">Citas programadas para el día de hoy.</div></div>
+    <a class="btn dark" href="#agenda">Ver agenda ›</a>
+   </div>
+   <div class="table-wrap">
+    <table>
+     <thead><tr><th>Hora</th><th>Cliente</th><th>Servicio</th><th>Barbero</th><th>Estado</th></tr></thead>
+     <tbody>
+     {% set ns = namespace(found=false) %}
+     {% for a in appointments %}
+       {% if a.appointment_date.isoformat() == today %}
+       {% set ns.found = true %}
+       <tr>
+        <td><strong>{{a.appointment_time.strftime("%H:%M")}}</strong></td>
+        <td>{{a.client.name}}</td>
+        <td>{{a.service.name}}</td>
+        <td>{{a.barber.name}}</td>
+        <td><span class="badge confirm">{{a.status}}</span></td>
+       </tr>
+       {% endif %}
+     {% endfor %}
+     {% if not ns.found %}
+       <tr><td colspan="5" class="muted">No hay citas para hoy.</td></tr>
+     {% endif %}
+     </tbody>
+    </table>
+   </div>
+  </div>
+ </section>
+
+ <section id="agenda" class="admin-card admin-section">
+  <div class="section-title">
+   <div><h3>Agenda completa</h3><div class="meta">Clientes, servicio, barbero y estado.</div></div>
+  </div>
+  <div class="table-wrap">
+   <table>
+    <thead><tr><th>Fecha</th><th>Hora</th><th>Cliente</th><th>WhatsApp</th><th>Servicio</th><th>Barbero</th><th>Precio</th><th>Pago</th><th>Estado</th><th>Acciones</th></tr></thead>
+    <tbody>
+    {% for a in appointments %}
+    <tr>
+     <td>{{a.appointment_date.strftime("%d/%m/%Y")}}</td>
+     <td>{{a.appointment_time.strftime("%H:%M")}}</td>
+     <td>{{a.client.name}}</td>
+     <td>{{a.client.phone}}</td>
+     <td>{{a.service.name}}</td>
+     <td>{{a.barber.name}}</td>
+     <td>{{a.price|money}}</td>
+     <td>{{a.payment_method or "No indicado"}}</td>
+     <td><span class="badge">{{a.status}}</span></td>
+     <td>
+      <a class="btn green" href="/admin/appointment/{{a.id}}/whatsapp" target="_blank">WhatsApp</a>
+      <form method="post" action="/admin/appointment/{{a.id}}/status" style="display:inline-flex;gap:5px;margin-left:5px">
+       <select name="status"><option>Confirmada</option><option>Pendiente</option><option>Atendida</option><option>Cancelada</option><option>No llegó</option></select>
+       <button class="btn dark">OK</button>
+      </form>
+                <form method="post" action="/admin/appointment/{{a.id}}/delete" onsubmit="return confirm('¿Seguro que deseas eliminar esta cita?');" style="display:inline">
+                  <button class="mini danger" type="submit">Eliminar</button>
+                </form>
+     </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+   </table>
+  </div>
+ </section>
+
+ <section id="barberos" class="admin-card admin-section">
+  <div class="section-title"><div><h3>Barberos</h3><div class="meta">Agregar, editar, ocultar o quitar.</div></div></div>
+
+  <div class="quick-grid">
+   <div class="quick">
+    <h4>+ Agregar barbero</h4>
+    <form method="post" action="/admin/barber" enctype="multipart/form-data">
+     <div class="field"><label>Nombre</label><input name="name" required></div>
+     <div class="field"><label>Especialidad</label><input name="specialty"></div>
+     <div class="field"><label>Foto</label><input type="file" name="photo" accept="image/jpeg,image/png,image/webp"></div>
+     <button class="btn gold" style="margin-top:10px">Agregar barbero</button>
+    </form>
+   </div>
+  </div>
+
+  <div class="manage-grid">
+  {% for b in admin_barbers %}
+   <div class="manage">
+    <div class="thumb round">
+     {% if barber_photos.get(b.id) %}<img src="{{barber_photos.get(b.id)}}" alt="{{b.name}}">
+     {% elif b.photo_url %}<img src="{{b.photo_url}}" alt="{{b.name}}">
+     {% else %}{{b.name[0]|upper}}{% endif %}
+    </div>
+    <form method="post" action="/admin/barber/{{b.id}}/update" enctype="multipart/form-data">
+     <div class="field"><label>Nombre</label><input name="name" value="{{b.name}}" required></div>
+     <div class="field"><label>Especialidad</label><input name="specialty" value="{{b.specialty or ''}}"></div>
+     <div class="field"><label>Estado</label><select name="active"><option value="true" {% if b.active %}selected{% endif %}>Activo</option><option value="false" {% if not b.active %}selected{% endif %}>Oculto</option></select></div>
+     <div class="field"><label>Cambiar foto</label><input type="file" name="photo" accept="image/jpeg,image/png,image/webp"></div>
+     <button class="btn dark" style="margin-top:9px;width:100%">Guardar cambios</button>
+    </form>
+    <form method="post" action="/admin/barber/{{b.id}}/remove" onsubmit="return confirm('¿Quitar este barbero?')">
+     <button class="btn danger" style="margin-top:7px;width:100%">Quitar barbero</button>
+    </form>
+   </div>
+  {% endfor %}
+  </div>
+ </section>
+
+ <section id="servicios" class="admin-card admin-section">
+  <div class="section-title"><div><h3>Servicios</h3><div class="meta">Fotos completas, precio y duración.</div></div></div>
+
+  <div class="quick-grid">
+   <div class="quick">
+    <h4>+ Agregar servicio</h4>
+    <form method="post" action="/admin/service" enctype="multipart/form-data">
+     <div class="field"><label>Nombre</label><input name="name" required></div>
+     <div class="field"><label>Precio ₡</label><input name="price" type="number" required></div>
+     <div class="field"><label>Duración min</label><input name="duration" type="number" value="30"></div>
+     <div class="field"><label>Foto del corte</label><input type="file" name="photo" accept="image/jpeg,image/png,image/webp"></div>
+     <button class="btn gold" style="margin-top:10px">Agregar servicio</button>
+    </form>
+   </div>
+  </div>
+
+  <div class="manage-grid">
+  {% for s in admin_services %}
+   <div class="manage">
+    <div class="thumb">{% if service_photos.get(s.id) %}<img src="{{service_photos.get(s.id)}}" alt="{{s.name}}">{% else %}✂{% endif %}</div>
+    <form method="post" action="/admin/service/{{s.id}}/update" enctype="multipart/form-data">
+     <div class="field"><label>Nombre</label><input name="name" value="{{s.name}}" required></div>
+     <div class="field"><label>Precio ₡</label><input name="price" type="number" value="{{s.price}}" required></div>
+     <div class="field"><label>Duración min</label><input name="duration" type="number" value="{{s.duration}}" required></div>
+     <div class="field"><label>Estado</label><select name="active"><option value="true" {% if s.active %}selected{% endif %}>Activo</option><option value="false" {% if not s.active %}selected{% endif %}>Oculto</option></select></div>
+     <div class="field"><label>Cambiar foto</label><input type="file" name="photo" accept="image/jpeg,image/png,image/webp"></div>
+     <button class="btn dark" style="margin-top:9px;width:100%">Guardar cambios</button>
+    </form>
+    <form method="post" action="/admin/service/{{s.id}}/remove" onsubmit="return confirm('¿Quitar este servicio?')">
+     <button class="btn danger" style="margin-top:7px;width:100%">Quitar servicio</button>
+    </form>
+   </div>
+  {% endfor %}
+  </div>
+ </section>
+
+ <section id="productos" class="admin-card admin-section">
+  <div class="section-title"><div><h3>Productos</h3><div class="meta">Foto, precio, stock y visibilidad.</div></div></div>
+
+  <div class="quick-grid">
+   <div class="quick">
+    <h4>+ Agregar producto</h4>
+    <form method="post" action="/admin/product" enctype="multipart/form-data">
+     <div class="field"><label>Nombre</label><input name="name" required></div>
+     <div class="field"><label>Precio ₡</label><input name="price" type="number" required></div>
+     <div class="field"><label>Stock</label><input name="stock" type="number" value="1" min="0"></div>
+     <div class="field"><label>Foto</label><input type="file" name="photo" accept="image/jpeg,image/png,image/webp"></div>
+     <button class="btn gold" style="margin-top:10px">Agregar producto</button>
+    </form>
+   </div>
+  </div>
+
+  {% if admin_products %}
+  <div class="manage-grid">
+  {% for p in admin_products %}
+   <div class="manage">
+    <div class="thumb">{% if product_photos.get(p.id) %}<img src="{{product_photos.get(p.id)}}" alt="{{p.name}}">{% else %}G{% endif %}</div>
+    <form method="post" action="/admin/product/{{p.id}}/update" enctype="multipart/form-data">
+     <div class="field"><label>Producto</label><input name="name" value="{{p.name}}" required></div>
+     <div class="field"><label>Precio ₡</label><input name="price" type="number" value="{{p.price}}" required></div>
+     <div class="field"><label>Stock</label><input name="stock" type="number" value="{{p.stock}}" required></div>
+     <div class="field"><label>Estado</label><select name="active"><option value="true" {% if p.active %}selected{% endif %}>Activo</option><option value="false" {% if not p.active %}selected{% endif %}>Oculto</option></select></div>
+     <div class="field"><label>Cambiar foto</label><input type="file" name="photo" accept="image/jpeg,image/png,image/webp"></div>
+     <button class="btn dark" style="margin-top:9px;width:100%">Guardar cambios</button>
+    </form>
+    <form method="post" action="/admin/product/{{p.id}}/remove" onsubmit="return confirm('¿Eliminar este producto?')">
+     <button class="btn danger" style="margin-top:7px;width:100%">Quitar producto</button>
+    </form>
+   </div>
+  {% endfor %}
+  </div>
+  {% else %}
+   <div class="notice">Todavía no hay productos. Agregá el primero arriba.</div>
+  {% endif %}
+ </section>
+
+ <section id="alertas" class="admin-card admin-section">
+  <div class="section-title"><div><h3>Alertas</h3><div class="meta">Control operativo de Goldens.</div></div></div>
+  <div class="notice">Las citas y estados se administran desde la Agenda. WhatsApp sigue funcionando en modo gratuito con el botón de cada cita.</div>
+ </section>
+
+</main>
+</div>
+
 {% endif %}
+<script>
+function toggleClientCancel(){
+  const box=document.getElementById('clientCancelBox');
+  if(box) box.classList.toggle('hidden');
+}
+</script>
 </body>
 </html>
