@@ -78,6 +78,25 @@ input:focus,select:focus,textarea:focus{border-color:#8c6f18}
 dialog{width:min(640px,94vw);border:1px solid #5a4918;border-radius:14px;background:#0d0d0d;color:#fff;padding:0}.modal-head{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid #2a2519}.modal-body{padding:16px}.x{background:none;border:0;color:#aaa;font-size:22px;cursor:pointer}
 @media(max-width:900px){.sidebar{width:72px}.brand h1,.brand small,.nav span:not(.ico),.nav-title,.side-foot{display:none}.brand{justify-content:center}.brand-logo-img{width:58px}.main{margin-left:72px}.cards,.manage-grid{grid-template-columns:1fr}.client-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:620px){.main{padding:12px}.top{flex-direction:column}.cards,.client-grid,.booking .form-grid,.manage-row{grid-template-columns:1fr}.full{grid-column:auto}.client-hero h1{font-size:30px}.sidebar{width:58px}.main{margin-left:58px}.nav a{justify-content:center}.brand-logo-img{width:48px}}
+
+/* CLIENTE — apariencia Goldens Agenda */
+.client-booking-shell{min-height:100vh;display:grid;grid-template-columns:minmax(0,1.9fr) minmax(350px,530px);background:#04090c}
+.client-visual{position:relative;min-height:100vh;padding:7.5vw 5.8vw 5vw;overflow:hidden;border-top:3px solid #173039}
+.client-copy{position:relative;z-index:2;max-width:330px}.client-copy h1{margin:0;font-size:clamp(35px,4vw,58px);line-height:.86;letter-spacing:-1.8px;font-weight:1000}.client-copy h1 .goldline{color:#d89d16;display:block}.client-copy h1 .smallline{color:#d89d16;display:block;font-size:.68em}
+.client-benefits{display:flex;gap:10px;margin-top:24px}.benefit{width:135px;min-height:105px;border:1px solid #8d6a13;border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-size:14px}.benefit b{font-size:27px;color:#dca51f;margin-bottom:8px}
+.client-copy .desc{font-size:14px;line-height:1.55;margin-top:15px;max-width:300px}.client-copy .motto{color:#bd8616;letter-spacing:4px;font-size:8px;margin-top:12px}
+.big-g-wrap{position:absolute;left:51%;top:48%;transform:translate(-50%,-50%);text-align:center;z-index:1}.big-g{width:min(34vw,430px);height:min(34vw,430px);object-fit:contain;filter:drop-shadow(0 18px 32px #0008)}.big-g-caption{color:#b98213;letter-spacing:7px;font-size:8px;margin-top:7px}
+.client-form-zone{min-height:100vh;background:#03090c;padding:15px 14px 15px 0;display:flex;align-items:flex-start;justify-content:center}
+.client-form-card{width:100%;max-width:440px;background:#f6f6f4;color:#111;border-radius:16px 16px 0 0;padding:20px 23px 18px;min-height:calc(100vh - 15px);box-shadow:0 15px 60px #0007}
+.client-form-logo{text-align:center}.client-form-logo img{width:105px;height:105px;object-fit:contain}.client-form-logo h2{font-size:27px;line-height:.9;margin:2px 0 2px;font-weight:1000;letter-spacing:.6px}.client-form-logo small{letter-spacing:6px;font-size:9px}.client-form-card h3{text-align:center;margin:15px 0 12px;font-size:20px}
+.booking-fields{display:grid;grid-template-columns:1fr 1fr;gap:8px}.booking-fields .span2{grid-column:1/-1}.client-form-card .field{gap:3px;margin:0}.client-form-card label{font-size:8px;color:#3f3f3f}.client-form-card input,.client-form-card select,.client-form-card textarea{background:#fff;color:#222;border:1px solid #d2d2d2;border-radius:6px;padding:8px 9px;font-size:11px;min-height:35px}.client-form-card textarea{min-height:55px;resize:vertical}
+.pay-options{display:grid;grid-template-columns:1fr 1fr;gap:7px}.pay-radio{position:relative}.pay-radio input{position:absolute;opacity:0;pointer-events:none}.pay-radio label{display:flex;align-items:center;justify-content:center;min-height:38px;border:1px solid #d2d2d2;border-radius:7px;background:#fff;font-size:11px;font-weight:900;cursor:pointer;color:#222}.pay-radio input:checked+label{border-color:#c79418;background:#fff6d7;box-shadow:inset 0 0 0 1px #c79418}
+.confirm-client{width:100%;border:0;border-radius:7px;background:linear-gradient(#e7b632,#c98600);color:#fff;font-weight:900;padding:11px;cursor:pointer;margin-top:1px}
+.client-back{text-align:center;font-size:10px;color:#777;margin-top:7px}.client-back a{color:#777}
+.cancel-box{margin-top:10px;border-top:1px solid #ddd;padding-top:8px}.cancel-box summary{list-style:none;text-align:center;color:#a32929;font-size:10px;font-weight:900;cursor:pointer}.cancel-box summary::-webkit-details-marker{display:none}.cancel-box .cancel-form{margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:6px}.cancel-box .cancel-form .span2{grid-column:1/-1}.cancel-submit{width:100%;border:1px solid #b13d3d;background:#fff4f4;color:#9f2424;border-radius:7px;padding:9px;font-weight:900;cursor:pointer}
+@media(max-width:980px){.client-booking-shell{grid-template-columns:1fr}.client-visual{min-height:500px;padding:55px 30px}.client-form-zone{min-height:auto;padding:0}.client-form-card{max-width:none;min-height:auto;border-radius:0}.big-g-wrap{left:70%}.big-g{width:min(45vw,350px);height:min(45vw,350px)}}
+@media(max-width:620px){.client-visual{min-height:440px;padding:42px 22px}.client-copy{max-width:230px}.client-benefits{gap:7px}.benefit{width:105px;min-height:92px;font-size:11px}.big-g-wrap{left:72%;top:54%}.big-g{width:190px;height:190px}.booking-fields{grid-template-columns:1fr}.booking-fields .span2,.cancel-box .cancel-form .span2{grid-column:auto}.client-form-zone{padding:0}.client-form-card{padding:18px 18px 22px}.cancel-box .cancel-form{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -325,68 +344,72 @@ if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.se
 </script>
 
 {% else %}
-<div class="client-shell">
-  <div class="client-top">
-    <div class="brand"><img class="brand-logo-img" src="/static/goldens-logo.png" alt="Goldens Barbershop"></div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap"><a class="btn btn-green" href="/whatsapp" target="_blank">WhatsApp Goldens</a><a class="btn btn-dark" href="#admin-login">Administrador</a></div>
-  </div>
-
-  <div class="client-hero">
-    <h1>Agenda tu cita en <span>Goldens</span></h1>
-    <p>Elegí servicio, barbero, horario y forma de pago.</p>
-    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><a class="btn btn-gold" href="#reservar">Agendar ahora</a><a class="btn btn-green" href="/whatsapp" target="_blank">WhatsApp 6015-8371</a></div>
-  </div>
-
-  <section class="section-anchor">
-    <div class="panel-head"><div><h3>Servicios</h3><p>Precios visibles antes de reservar.</p></div></div>
-    <div class="client-grid">
-      {% for s in services %}
-      <div class="client-card"><div class="thumb">{% if service_photos.get(s.id) %}<img src="{{service_photos.get(s.id)}}">{% else %}✂{% endif %}</div><h4>{{s.name}}</h4><div class="meta">{{s.duration}} min</div><div class="price">{{s.price|money}}</div></div>
-      {% endfor %}
+<div class="client-booking-shell">
+  <section class="client-visual">
+    <div class="client-copy">
+      <h1>GOLDENS<span class="goldline">AGENDA</span><span class="smallline">BARBERSHOP</span></h1>
+      <div class="client-benefits">
+        <div class="benefit"><b>♛</b><span>ESTILO<br>PREMIUM</span></div>
+        <div class="benefit"><b>★</b><span>ATENCIÓN<br>PERSONALIZADA</span></div>
+      </div>
+      <div class="desc">Organizá tu cita, elegí tu servicio y disfrutá la experiencia Goldens.</div>
+      <div class="motto">DISCIPLINA · ESTILO · RESULTADOS</div>
+    </div>
+    <div class="big-g-wrap">
+      <img class="big-g" src="/static/goldens-512.png" alt="Goldens">
+      <div class="big-g-caption">BARBERSHOP MANAGEMENT</div>
     </div>
   </section>
 
-  <section class="section-anchor" style="margin-top:16px">
-    <div class="panel-head"><div><h3>Barberos</h3><p>Seleccioná quién querés que te atienda.</p></div></div>
-    <div class="client-grid">
-      {% for b in barbers %}
-      <div class="client-card"><div class="thumb">{% if barber_photos.get(b.id) %}<img src="{{barber_photos.get(b.id)}}">{% elif b.photo_url %}<img src="{{b.photo_url}}">{% else %}{{b.name[0]|upper}}{% endif %}</div><h4>{{b.name}}</h4><div class="meta">{{b.specialty or "Disponible para reservas"}}</div></div>
-      {% endfor %}
+  <section class="client-form-zone">
+    <div class="client-form-card">
+      <div class="client-form-logo">
+        <img src="/static/goldens-512.png" alt="Goldens">
+        <h2>GOLDENS</h2>
+        <small>BARBERSHOP</small>
+      </div>
+      <h3>AGENDA TU CITA</h3>
+
+      <form method="post" action="/reservar" class="booking-fields">
+        <div class="field span2"><label>Nombre</label><input name="name" required></div>
+        <div class="field span2"><label>WhatsApp</label><input name="phone" required placeholder="8888-8888"></div>
+        <div class="field span2"><label>Servicio</label><select name="service_id" required>{% for s in services %}<option value="{{s.id}}">{{s.name}} — {{s.price|money}}</option>{% endfor %}</select></div>
+        <div class="field span2"><label>Barbero</label><select name="barber_id" id="barber" required>{% for b in barbers %}<option value="{{b.id}}">{{b.name}}</option>{% endfor %}</select></div>
+        <div class="field"><label>Fecha</label><input type="date" name="appointment_date" id="date" min="{{today}}" value="{{today}}" required></div>
+        <div class="field"><label>Hora</label><select name="appointment_time" id="time" required><option value="">Cargando...</option></select></div>
+
+        <div class="field span2">
+          <label>Forma de pago</label>
+          <div class="pay-options">
+            <div class="pay-radio"><input type="radio" name="payment_method" id="payCash" value="Efectivo" required><label for="payCash">💵 EFECTIVO</label></div>
+            <div class="pay-radio"><input type="radio" name="payment_method" id="paySinpe" value="SINPE Móvil" required><label for="paySinpe">📱 SINPE MÓVIL</label></div>
+          </div>
+        </div>
+
+        <div class="field span2"><label>Comentario opcional</label><textarea name="notes" rows="2"></textarea></div>
+        <div class="field span2"><button class="confirm-client" type="submit">Confirmar reserva</button></div>
+      </form>
+
+      <details class="cancel-box">
+        <summary>¿Agendaste por error? CANCELAR CITA</summary>
+        <form method="post" action="/cancelar-mi-cita" class="cancel-form" onsubmit="return confirm('¿Seguro que deseas cancelar esta cita?');">
+          <div class="field span2"><label>WhatsApp usado en la reserva</label><input name="phone" required placeholder="8888-8888"></div>
+          <div class="field"><label>Fecha de la cita</label><input type="date" name="appointment_date" required></div>
+          <div class="field"><label>Hora de la cita</label><input type="time" name="appointment_time" required></div>
+          <div class="field span2"><button class="cancel-submit" type="submit">Cancelar mi cita</button></div>
+        </form>
+      </details>
+
+      <div class="client-back"><a href="/whatsapp" target="_blank">WhatsApp Goldens 6015-8371</a> · <a href="#admin-login" onclick="document.getElementById('adminBox').style.display='block';return false">Administrador</a></div>
+
+      <div id="adminBox" style="display:none;margin-top:10px;border-top:1px solid #ddd;padding-top:10px">
+        <form method="post" action="/admin/login">
+          <div class="field"><label>Usuario</label><input name="user" value="admin" required></div>
+          <div class="field" style="margin-top:6px"><label>PIN</label><input name="pin" type="password" required></div>
+          <button class="confirm-client" style="background:#222;margin-top:8px">Ingresar</button>
+        </form>
+      </div>
     </div>
-  </section>
-
-  <section class="section-anchor" style="margin-top:16px">
-    <div class="panel-head"><div><h3>Productos</h3><p>Disponibles en Goldens.</p></div></div>
-    <div class="client-grid">
-      {% for p in products %}
-      <div class="client-card"><div class="thumb">{% if product_photos.get(p.id) %}<img src="{{product_photos.get(p.id)}}">{% else %}📦{% endif %}</div><h4>{{p.name}}</h4><div class="price">{{p.price|money}}</div></div>
-      {% endfor %}
-      {% if not products %}<div class="client-card">No hay productos visibles actualmente.</div>{% endif %}
-    </div>
-  </section>
-
-  <section id="reservar" class="booking section-anchor">
-    <div class="panel-head"><div><h3>Reservá tu cita</h3><p>Completá tus datos.</p></div></div>
-    <form method="post" action="/reservar" class="form-grid">
-      <div class="field"><label>Nombre</label><input name="name" required></div>
-      <div class="field"><label>WhatsApp</label><input name="phone" required placeholder="8888-8888"></div>
-      <div class="field"><label>Servicio</label><select name="service_id" required>{% for s in services %}<option value="{{s.id}}">{{s.name}} — {{s.price|money}}</option>{% endfor %}</select></div>
-      <div class="field"><label>Barbero</label><select name="barber_id" id="barber" required>{% for b in barbers %}<option value="{{b.id}}">{{b.name}}</option>{% endfor %}</select></div>
-      <div class="field"><label>Fecha</label><input type="date" name="appointment_date" id="date" min="{{today}}" value="{{today}}" required></div>
-      <div class="field"><label>Hora disponible</label><select name="appointment_time" id="time" required><option value="">Cargando...</option></select></div>
-      <div class="field"><label>Forma de pago</label><select name="payment_method" required><option value="">Seleccioná</option><option value="Efectivo">Efectivo</option><option value="SINPE Móvil">SINPE Móvil</option></select></div>
-      <div class="field full"><label>Comentario opcional</label><textarea name="notes" rows="3"></textarea></div>
-      <div class="field full"><button class="btn btn-gold">Confirmar reserva</button></div>
-    </form>
-  </section>
-
-  <section id="admin-login" class="booking section-anchor" style="max-width:430px;margin:18px auto">
-    <div class="panel-head"><div><h3>Acceso administrador</h3></div></div>
-    <form method="post" action="/admin/login">
-      <div class="field"><label>Usuario</label><input name="user" value="admin" required></div>
-      <div class="field"><label>PIN</label><input name="pin" type="password" required></div>
-      <button class="btn btn-dark" style="width:100%">Ingresar</button>
-    </form>
   </section>
 </div>
 
