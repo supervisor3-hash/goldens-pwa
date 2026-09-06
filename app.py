@@ -512,6 +512,39 @@ def client_cancel_appointment(token):
         flash("Tu cita fue cancelada. El horario quedó disponible nuevamente.", "ok")
     return redirect(url_for("public_home"))
 
+@app.route("/cancelar-mi-cita", methods=["POST"])
+def client_cancel_lookup():
+    phone = normalize_phone(request.form.get("phone", ""))
+    try:
+        ap_date = datetime.strptime(request.form.get("appointment_date", ""), "%Y-%m-%d").date()
+        ap_time = datetime.strptime(request.form.get("appointment_time", ""), "%H:%M").time()
+    except Exception:
+        flash("Revisá la fecha y la hora de la cita.", "error")
+        return redirect(url_for("public_home"))
+
+    client = Client.query.filter_by(phone=phone).first()
+    if not client:
+        flash("No encontramos una cita con esos datos.", "error")
+        return redirect(url_for("public_home"))
+
+    ap = Appointment.query.filter_by(
+        client_id=client.id,
+        appointment_date=ap_date,
+        appointment_time=ap_time,
+    ).order_by(Appointment.id.desc()).first()
+
+    if not ap:
+        flash("No encontramos una cita con esos datos.", "error")
+    elif ap.status == "Cancelada":
+        flash("Esa cita ya estaba cancelada.", "ok")
+    elif ap.status == "Atendida":
+        flash("Esa cita ya fue atendida.", "error")
+    else:
+        ap.status = "Cancelada"
+        db.session.commit()
+        flash("Cita cancelada correctamente. El espacio quedó disponible nuevamente.", "ok")
+    return redirect(url_for("public_home"))
+
 @app.route("/admin/login", methods=["POST"])
 def admin_login():
     if request.form.get("user") == ADMIN_USER and request.form.get("pin") == ADMIN_PIN:
